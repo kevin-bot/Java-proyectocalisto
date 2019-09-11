@@ -5,6 +5,9 @@ import Controlador.Docente;
 import Controlador.Docente_administrador;
 import Controlador.Usuario;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -12,6 +15,7 @@ public class login extends javax.swing.JFrame {
 
     public login() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -151,25 +155,19 @@ public class login extends javax.swing.JFrame {
        }else{System.out.println("puedes entrar");}*/
         
         
-        
-        
         Usuario Myusuario=new Usuario();
-        /*
-        if(Myusuario.realizar_login(txtcedula.getText(),txtpassword.getText())){
-            System.out.println("el usuario si existe");
-        }else {
-            System.out.println("el usuario no existe");
-        }*/
-      
+        String contraseñadesifrada="";
+        for (int i = 0; i < txtpassword.getPassword().length; i++) {
+                     contraseñadesifrada+= txtpassword.getPassword()[i];                        
+            }         
+        try {
+            Myusuario.realizar_login(txtcedula.getText(),contraseñadesifrada);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        //  CODIGO PARA HACER PRUEBA DEL DOCENTE CREADO ANTES DE LA INTERFAZ
-        Docente_administrador miDocente_administrador= new Docente_administrador();        
-        Docente miDocente= new Docente("1234", "kevin", "narvaez", "kevin", "Docente","314", "Cll 60 30-20");
-        miDocente_administrador.Creardocente(miDocente);
-        
-        
-        //CODIGO PARA ACTUALIZAR UN DOCENTE CREADO ANTES DE LA INTERFAZ
-       // miDocente_administrador.Consultardocentes();
+     
                
     }//GEN-LAST:event_btnconsultarActionPerformed
 
@@ -179,8 +177,8 @@ public class login extends javax.swing.JFrame {
 
     private void txtcedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcedulaKeyTyped
         //VALIDAR SOLO NUMEROS EN EL CAMPO
-            Solonumeros(evt);
-            validarTamañoTXT(txtcedula,10, evt);
+            //Solonumeros(evt);
+            //validarTamañoTXT(txtcedula,10, evt);
     }//GEN-LAST:event_txtcedulaKeyTyped
 
     private void txtcedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcedulaKeyReleased
