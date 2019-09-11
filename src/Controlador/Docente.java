@@ -4,10 +4,10 @@ package Controlador;
 
 public class Docente extends Usuario{
 
-    public Docente(String cedula, String nombre, String apellido, String telefono, String rol, String telfono, String direccion) {
-        super(cedula, nombre, apellido, telefono, rol, telfono, direccion);
+    public Docente(String cedula, String nombre, String apellido, String password, String rol, String telefono, String direccion) {
+        super(cedula, nombre, apellido, password, rol, telefono, direccion);
     }
-
+    
     public Docente() {
     }
 

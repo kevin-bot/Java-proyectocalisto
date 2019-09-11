@@ -1,6 +1,8 @@
 
 package vista;
 
+import Controlador.Docente;
+import Controlador.Docente_administrador;
 import Controlador.Usuario;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -143,10 +145,10 @@ public class login extends javax.swing.JFrame {
          }else{evt.consume();}
     }
     private void btnconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsultarActionPerformed
-        System.out.println(""+txtpassword.getPassword().toString());
+       /* System.out.println(""+txtpassword.getPassword().toString());
        if(txtcedula.getText().equals("") || txtpassword.getPassword().toString().equals("")){
             JOptionPane.showMessageDialog(null,"Todos los campos son obligatorios",null,2);
-       }else{System.out.println("puedes entrar");}
+       }else{System.out.println("puedes entrar");}*/
         
         
         
@@ -158,7 +160,17 @@ public class login extends javax.swing.JFrame {
         }else {
             System.out.println("el usuario no existe");
         }*/
+      
         
+        //  CODIGO PARA HACER PRUEBA DEL DOCENTE CREADO ANTES DE LA INTERFAZ
+        Docente_administrador miDocente_administrador= new Docente_administrador();        
+        Docente miDocente= new Docente("1234", "kevin", "narvaez", "kevin", "Docente","314", "Cll 60 30-20");
+        miDocente_administrador.Creardocente(miDocente);
+        
+        
+        //CODIGO PARA ACTUALIZAR UN DOCENTE CREADO ANTES DE LA INTERFAZ
+       // miDocente_administrador.Consultardocentes();
+               
     }//GEN-LAST:event_btnconsultarActionPerformed
 
     private void txtpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpasswordActionPerformed

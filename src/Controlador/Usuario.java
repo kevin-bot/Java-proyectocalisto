@@ -6,15 +6,15 @@ import java.sql.*;
 
 public  class Usuario {
     
-    String cedula,nombre,apellido,password,rol,telfono,direccion;
+    protected String cedula,nombre,apellido,password,rol,telefono,direccion;
 
-    public Usuario(String cedula, String nombre, String apellido, String password, String rol, String telfono, String direccion) {
+    public Usuario(String cedula, String nombre, String apellido, String password, String rol,String telefono,  String direccion) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
         this.password = password;
-        this.rol = rol;
-        this.telfono = telfono;
+        this.rol = rol;        
+        this.telefono=telefono;
         this.direccion = direccion;
     }
 
@@ -45,12 +45,12 @@ public  class Usuario {
         this.apellido = apellido;
     }
 
-    public String getTelefono() {
+    public String getPassword() {
         return password;
     }
 
-    public void setTelefono(String telefono) {
-        this.password = telefono;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRol() {
@@ -61,12 +61,12 @@ public  class Usuario {
         this.rol = rol;
     }
 
-    public String getTelfono() {
-        return telfono;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setTelfono(String telfono) {
-        this.telfono = telfono;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getDireccion() {
@@ -76,6 +76,10 @@ public  class Usuario {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+
+    
+    
+   
     
     //metodo loggeo de usuarios 
     
