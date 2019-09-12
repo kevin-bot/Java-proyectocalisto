@@ -28,6 +28,7 @@ public class login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtpassword = new javax.swing.JPasswordField();
+        jComRol = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +69,8 @@ public class login extends javax.swing.JFrame {
             }
         });
 
+        jComRol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rol", "Docente", "Administrador docente" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,7 +82,7 @@ public class login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
+                        .addGap(147, 147, 147)
                         .addComponent(btnconsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(95, 95, 95)
@@ -87,7 +90,8 @@ public class login extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(txtcedula)
                             .addComponent(jLabel3)
-                            .addComponent(txtpassword, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))))
+                            .addComponent(txtpassword, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                            .addComponent(jComRol, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(95, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -95,17 +99,19 @@ public class login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(10, 10, 10)
+                .addGap(19, 19, 19)
+                .addComponent(jComRol, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnconsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -161,7 +167,19 @@ public class login extends javax.swing.JFrame {
                      contraseñadesifrada+= txtpassword.getPassword()[i];                        
             }         
         try {
-            Myusuario.realizar_login(txtcedula.getText(),contraseñadesifrada);
+            //validacion para saber que usuario se loggueo para asi hacer la consulta a la tabla correcponiente
+            
+            if(jComRol.getSelectedItem().toString().equals("Docente")){
+                
+                Myusuario.realizar_login(txtcedula.getText(),contraseñadesifrada,"docente");
+                
+            }else if(jComRol.getSelectedItem().toString().equals("Administrador docente")){
+                Myusuario.realizar_login(txtcedula.getText(),contraseñadesifrada,"administrador docente");
+                    
+            }else{
+                JOptionPane.showMessageDialog(null,"debe seleccionar un rol");
+            }
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
@@ -203,6 +221,7 @@ public class login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnconsultar;
+    private javax.swing.JComboBox jComRol;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

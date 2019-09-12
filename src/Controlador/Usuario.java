@@ -84,73 +84,78 @@ public  class Usuario {
     
     //metodo loggeo de usuarios 
     
-    public void realizar_login(String cedula,String password) throws SQLException{
-        
-        String rolUsuarioLoggeado="";
+    public void realizar_login(String cedula,String password,String database) throws SQLException{
+                                
         Conexion miconexion=new Conexion();
         
         try{
-            PreparedStatement ConsultaPreparada=miconexion.getConnection().prepareStatement("SELECT * FROM usuario1 where usu=? and contra = ?");
+            
+            
+            
+            PreparedStatement ConsultaPreparada=miconexion.getConnection().prepareStatement("SELECT * FROM '"+database+"' where cedula=? and password = ?");
             ConsultaPreparada.setString(1, cedula);
             ConsultaPreparada.setString(2, password);
             
             ResultSet res=ConsultaPreparada.executeQuery();
+            
+            
+            
             if(res.next()){
                 
                 
-                if(res.getString("rol").equals("docente")){ 
-                     String roles[]={"Administrar Estudiante","Administrar notas estudiante"};    
-                     String CrudDocenteEstudiante[]={"Consultar estudiante","Consultar rendimiento estudiante"};
-                     String CrudDocenteNotasEstudiante[]={"Crear nota","Consultar notas","Eliminar Notas","Actualizar nota"};
-                                              
-                     String opcionAdministrar=(String)JOptionPane.showInputDialog(null, "¿Que desea hacer?", "Opcion de ingreso", JOptionPane.DEFAULT_OPTION, null, roles, roles[0]);
-                     switch (opcionAdministrar){
-                         case "Administrar Estudiante":{
-                             String opcionAdministrarEstudiante=(String)JOptionPane.showInputDialog(null, "¿Que desea hacer?", "Opcion de ingreso", JOptionPane.DEFAULT_OPTION, null, CrudDocenteEstudiante, CrudDocenteEstudiante[0]);
-                             switch (opcionAdministrarEstudiante){
-                                 case "Consultar estudiante":{
-                                        System.out.println("Abrir consultar estudiante");
-                                     break;
-                                 }
-                                 case "Consultar rendimiento estudiante":{
-                                     System.out.println("Abrir consultar notas del estudiante");
-                                     break;
-                                 }
-                                 
-                             }
-                             break;
-                         }
-                         case "Administrar notas estudiante":{
-                             String opcionAdministrarEstudiante=(String)JOptionPane.showInputDialog(null, "¿Que desea hacer?", "Opcion de ingreso", JOptionPane.DEFAULT_OPTION, null, CrudDocenteNotasEstudiante, CrudDocenteNotasEstudiante[0]);
-                            
-                                switch (opcionAdministrarEstudiante){
-                                 case "Crear nota":{
-                                        System.out.println("Abrir crear nota");
-                                     break;
-                                 }
-                                 case "Consultar notas":{
-                                     System.out.println("Abrir consultar nota");
-                                     break;
-                                 }
-                                 case "Eliminar Notas":{
-                                     System.out.println("Abrir eliminar nota");
-                                     break;
-                                 }
-                                 case "Actualizar nota":{
-                                     System.out.println("Abrir cactualizar nota");
-                                     break;
-                                 }
-                                
-                                 
-                             }
-                             
-                             break;
-                         }
-                         
-                     }
-                        
+                if(database.equals("docente")){ 
+//                     String roles[]={"Administrar Estudiante","Administrar notas estudiante"};    
+//                     String CrudDocenteEstudiante[]={"Consultar estudiante","Consultar rendimiento estudiante"};
+//                     String CrudDocenteNotasEstudiante[]={"Crear nota","Consultar notas","Eliminar Notas","Actualizar nota"};
+//                                              
+//                     String opcionAdministrar=(String)JOptionPane.showInputDialog(null, "¿Que desea hacer?", "Opcion de ingreso", JOptionPane.DEFAULT_OPTION, null, roles, roles[0]);
+//                     switch (opcionAdministrar){
+//                         case "Administrar Estudiante":{
+//                             String opcionAdministrarEstudiante=(String)JOptionPane.showInputDialog(null, "¿Que desea hacer?", "Opcion de ingreso", JOptionPane.DEFAULT_OPTION, null, CrudDocenteEstudiante, CrudDocenteEstudiante[0]);
+//                             switch (opcionAdministrarEstudiante){
+//                                 case "Consultar estudiante":{
+//                                        System.out.println("Abrir consultar estudiante");
+//                                     break;
+//                                 }
+//                                 case "Consultar rendimiento estudiante":{
+//                                     System.out.println("Abrir consultar notas del estudiante");
+//                                     break;
+//                                 }
+//                                 
+//                             }
+//                             break;
+//                         }
+//                         case "Administrar notas estudiante":{
+//                             String opcionAdministrarEstudiante=(String)JOptionPane.showInputDialog(null, "¿Que desea hacer?", "Opcion de ingreso", JOptionPane.DEFAULT_OPTION, null, CrudDocenteNotasEstudiante, CrudDocenteNotasEstudiante[0]);
+//                            
+//                                switch (opcionAdministrarEstudiante){
+//                                 case "Crear nota":{
+//                                        System.out.println("Abrir crear nota");
+//                                     break;
+//                                 }
+//                                 case "Consultar notas":{
+//                                     System.out.println("Abrir consultar nota");
+//                                     break;
+//                                 }
+//                                 case "Eliminar Notas":{
+//                                     System.out.println("Abrir eliminar nota");
+//                                     break;
+//                                 }
+//                                 case "Actualizar nota":{
+//                                     System.out.println("Abrir cactualizar nota");
+//                                     break;
+//                                 }
+//                                
+//                                 
+//                             }
+//                             
+//                             break;
+//                         }
+//                         
+//                     }
+                        System.out.println("holaaaa");
                      
-                }else if(res.getString("rol").equals("docente ad")){
+                }else if(database.equals("administrador docente")){                    
                         String roles[]={"Administrar matricula","Administrar docente","Administrar asignatura","Administrar estudiante"};                   
                     if(JOptionPane.showInputDialog(null, "¿Que desea hacer?", "Opcion de ingreso", JOptionPane.DEFAULT_OPTION, null, roles, roles[0])==""){
                     
