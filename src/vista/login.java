@@ -155,10 +155,10 @@ public class login extends javax.swing.JFrame {
          }else{evt.consume();}
     }
     private void btnconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsultarActionPerformed
-       /* System.out.println(""+txtpassword.getPassword().toString());
+        
        if(txtcedula.getText().equals("") || txtpassword.getPassword().toString().equals("")){
             JOptionPane.showMessageDialog(null,"Todos los campos son obligatorios",null,2);
-       }else{System.out.println("puedes entrar");}*/
+       }else{
         
         
         Usuario Myusuario=new Usuario();
@@ -174,7 +174,7 @@ public class login extends javax.swing.JFrame {
                 Myusuario.realizar_login(txtcedula.getText(),contraseñadesifrada,"docente");
                 
             }else if(jComRol.getSelectedItem().toString().equals("Administrador docente")){
-                Myusuario.realizar_login(txtcedula.getText(),contraseñadesifrada,"administrador docente");
+                Myusuario.realizar_login(txtcedula.getText(),contraseñadesifrada,"administrador_docente");
                     
             }else{
                 JOptionPane.showMessageDialog(null,"debe seleccionar un rol");
@@ -185,7 +185,7 @@ public class login extends javax.swing.JFrame {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-     
+       }
                
     }//GEN-LAST:event_btnconsultarActionPerformed
 
@@ -195,8 +195,8 @@ public class login extends javax.swing.JFrame {
 
     private void txtcedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcedulaKeyTyped
         //VALIDAR SOLO NUMEROS EN EL CAMPO
-            //Solonumeros(evt);
-            //validarTamañoTXT(txtcedula,10, evt);
+            Solonumeros(evt);
+            validarTamañoTXT(txtcedula,10, evt);
     }//GEN-LAST:event_txtcedulaKeyTyped
 
     private void txtcedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcedulaKeyReleased

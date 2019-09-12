@@ -5,6 +5,10 @@ import Modelo.Conexion;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
+import vista.AgregarDocente;
+import vista.inicioAdmibnistradorDocente;
+import vista.iniciodocente;
+
 public  class Usuario {
     
     protected String cedula,nombre,apellido,password,rol,telefono,direccion;
@@ -89,10 +93,11 @@ public  class Usuario {
         Conexion miconexion=new Conexion();
         
         try{
+                
             
+            System.out.println(""+database);
             
-            
-            PreparedStatement ConsultaPreparada=miconexion.getConnection().prepareStatement("SELECT * FROM '"+database+"' where cedula=? and password = ?");
+            PreparedStatement ConsultaPreparada=miconexion.getConnection().prepareStatement("SELECT * FROM "+database+" where cedula=? and password = ?");
             ConsultaPreparada.setString(1, cedula);
             ConsultaPreparada.setString(2, password);
             
@@ -103,72 +108,43 @@ public  class Usuario {
             if(res.next()){
                 
                 
-                if(database.equals("docente")){ 
-//                     String roles[]={"Administrar Estudiante","Administrar notas estudiante"};    
-//                     String CrudDocenteEstudiante[]={"Consultar estudiante","Consultar rendimiento estudiante"};
-//                     String CrudDocenteNotasEstudiante[]={"Crear nota","Consultar notas","Eliminar Notas","Actualizar nota"};
-//                                              
-//                     String opcionAdministrar=(String)JOptionPane.showInputDialog(null, "¿Que desea hacer?", "Opcion de ingreso", JOptionPane.DEFAULT_OPTION, null, roles, roles[0]);
-//                     switch (opcionAdministrar){
-//                         case "Administrar Estudiante":{
-//                             String opcionAdministrarEstudiante=(String)JOptionPane.showInputDialog(null, "¿Que desea hacer?", "Opcion de ingreso", JOptionPane.DEFAULT_OPTION, null, CrudDocenteEstudiante, CrudDocenteEstudiante[0]);
-//                             switch (opcionAdministrarEstudiante){
-//                                 case "Consultar estudiante":{
-//                                        System.out.println("Abrir consultar estudiante");
-//                                     break;
-//                                 }
-//                                 case "Consultar rendimiento estudiante":{
-//                                     System.out.println("Abrir consultar notas del estudiante");
-//                                     break;
-//                                 }
-//                                 
-//                             }
-//                             break;
-//                         }
-//                         case "Administrar notas estudiante":{
-//                             String opcionAdministrarEstudiante=(String)JOptionPane.showInputDialog(null, "¿Que desea hacer?", "Opcion de ingreso", JOptionPane.DEFAULT_OPTION, null, CrudDocenteNotasEstudiante, CrudDocenteNotasEstudiante[0]);
-//                            
-//                                switch (opcionAdministrarEstudiante){
-//                                 case "Crear nota":{
-//                                        System.out.println("Abrir crear nota");
-//                                     break;
-//                                 }
-//                                 case "Consultar notas":{
-//                                     System.out.println("Abrir consultar nota");
-//                                     break;
-//                                 }
-//                                 case "Eliminar Notas":{
-//                                     System.out.println("Abrir eliminar nota");
-//                                     break;
-//                                 }
-//                                 case "Actualizar nota":{
-//                                     System.out.println("Abrir cactualizar nota");
-//                                     break;
-//                                 }
-//                                
-//                                 
-//                             }
-//                             
-//                             break;
-//                         }
-//                         
-//                     }
-                        System.out.println("holaaaa");
+                if(database.equals("docente")){                    
                      
-                }else if(database.equals("administrador docente")){                    
-                        String roles[]={"Administrar matricula","Administrar docente","Administrar asignatura","Administrar estudiante"};                   
-                    if(JOptionPane.showInputDialog(null, "¿Que desea hacer?", "Opcion de ingreso", JOptionPane.DEFAULT_OPTION, null, roles, roles[0])==""){
+                              java.awt.EventQueue.invokeLater(new Runnable() {
+                                public void run() {
+                                    iniciodocente dialog = new iniciodocente(new javax.swing.JFrame(), true);
+                                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                                        @Override
+                                        public void windowClosing(java.awt.event.WindowEvent e) {
+                                            //System.exit(0);
+                                        }
+                                    });
+                                    dialog.setVisible(true);
+                                }
+                            });    
+                     
+                }else if(database.equals("administrador_docente")){
                     
-                    }   
+                    System.out.println("si entro a aca");
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        public void run() {
+                            inicioAdmibnistradorDocente dialog = new inicioAdmibnistradorDocente(new javax.swing.JFrame(), true);
+                            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                                @Override
+                                public void windowClosing(java.awt.event.WindowEvent e) {
+                                    //System.exit(0);
+                                }
+                            });
+                            dialog.setVisible(true);
+                        }
+                    });
                     
-                    
-                } else{
+                }
+                
+                
+            }else{
                         JOptionPane.showMessageDialog(null,"Datos no validos");
-                }               
-                
-                
-            }
-            
+                } 
             
             res.close();
             ConsultaPreparada.close();
