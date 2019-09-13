@@ -7,11 +7,10 @@
             <file>file:/E:/Documentos/NetBeansProjects/proyectocalisto/src/Controlador/Usuario.java</file>
         </group>
         <group name="Group 20190524-10:18:13">
-            <file>file:/D:/Documento/NetBeansProjects/proyectocalisto/src/vista/login.java</file>
+            <file>file:/D:/Documento/NetBeansProjects/proyectocalisto/src/vista/AdministrarEstudiante.java</file>
             <file>file:/D:/Documento/NetBeansProjects/proyectocalisto/src/vista/inicioAdmibnistradorDocente.java</file>
-            <file>file:/D:/Documento/NetBeansProjects/proyectocalisto/src/vista/AgregarDocente.java</file>
-            <file>file:/D:/Documento/NetBeansProjects/proyectocalisto/src/vista/iniciodocente.java</file>
-            <file>file:/D:/Documento/NetBeansProjects/proyectocalisto/src/Controlador/Usuario.java</file>
+            <file>file:/D:/Documento/NetBeansProjects/proyectocalisto/src/Controlador/Estudiante.java</file>
+            <file>file:/D:/Documento/NetBeansProjects/proyectocalisto/src/Controlador/Docente_administrador.java</file>
         </group>
     </open-files>
 </project-private>

@@ -21,103 +21,26 @@ public class Docente_administrador extends Usuario{
     public Docente_administrador() {
     }
 
-    
-    
-    
-    // CURUD MATRICULA
-    
-    public void CrearMatricula(Materia Mimatricula){
-              Conexion miDbconn=new Conexion();
-              String tirar ="";
-        try {                                          
-            
-             Statement pst = miDbconn.getConnection().createStatement();                                     
-             
-              pst.executeUpdate("INSERT INTO nuevoCliente VALUES ('"+tirar+"','"+tirar+"','"
-                    +tirar+"','"+tirar+"','"+tirar+"','"+tirar+"','"+tirar+"')");
-    
-            JOptionPane.showMessageDialog(null,"La matricula re ha registrado exitosamente");
-            
-            pst.close();
-            miDbconn.getdesconectar();
-            
-        } catch (SQLException ex) {
-            //Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);            
-            JOptionPane.showMessageDialog(null,"Error ya existe ", null, 0);
-        }
-    
-    }   
-    
-    public void ActualizarMatricula(int datosaodificar,String otrodato){
-        Conexion conex= new Conexion();      
-        
-        try {
-         
-                PreparedStatement consultaInicioSe=conex.getConnection().prepareStatement("update  vehiculo set cantidad = ?  where placa =?  ");         
-                consultaInicioSe.setInt(1,  datosaodificar);
-                consultaInicioSe.setString(2,otrodato);
-                consultaInicioSe.executeUpdate();
-                                          
-                consultaInicioSe.close();
-                conex.getdesconectar();
-    
-        } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-                Logger.getLogger(Docente_administrador.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        
-    }
-    
-    public void EliminarMatricula(int codigoEliminar){
-        Conexion conex= new Conexion();      
-        
-        try {
-         
-                PreparedStatement consultaInicioSe=conex.getConnection().prepareStatement("update  vehiculo set cantidad = ?  where placa =?  ");         
-                consultaInicioSe.setInt(1,codigoEliminar);                
-                consultaInicioSe.executeUpdate();
-                                          
-                consultaInicioSe.close();
-                conex.getdesconectar();
-    
-        } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-                Logger.getLogger(Docente_administrador.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-    
-    }
-    
-     public void ConsultarMatricula(){
-            
-    }
+  
     // CRUD DOCENTES 
-    
-    
-    
+   
     public void Creardocente(Docente MiDocente){
          Conexion miDbconn=new Conexion();              
-        try {                 
-            
-            if(Consultardocentes(MiDocente.getCedula())){
-                JOptionPane.showMessageDialog(null, "Lo sentimos el doncente ya existe, verifique la cedula de docente");
-            }else{            
+        try {              
                  Statement pst = miDbconn.getConnection().createStatement();                                     
                  pst.executeUpdate("INSERT INTO docente VALUES ('"+MiDocente.getCedula()+"','"+MiDocente.getNombre()+"','"+MiDocente.getApellido()+"','"+MiDocente.getEps()
                          +"','"+MiDocente.getEstrato()+"','"+MiDocente.getGrado()+"','2019-04-04','1','"+MiDocente.getFormacion()+"','"+MiDocente.getPassword()+"','"+MiDocente.getTelefono()+"')");
  
                 JOptionPane.showMessageDialog(null, "La matricula re ha registrado exitosamente");
 
-               pst.close();
-               miDbconn.getdesconectar();
-            }    
+            pst.close(); 
+            miDbconn.getdesconectar();
         } catch (SQLException ex) {
             //Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);            
             JOptionPane.showMessageDialog(null,"Error ya existe ", null, 0);
         }
         
     } 
-    
-    // METODO QUE SE ENCARGA DE COSULTAR EL DOCENTE Y AL MISMO TIEMPO  DEVUELVE UNA VARIABLE PARA SABER SI EXITE YA ESE USUARIO77
     
     public boolean Consultardocentes(String cedula){
          Conexion miconexion=new Conexion();
@@ -143,7 +66,8 @@ public class Docente_administrador extends Usuario{
               Mydocente.setTelefono(res.getString("telefono")); 
               Existe_docente=true;
             }
-            
+                    
+           
             res.close();
             ConsultaPreparada.close();
             miconexion.getdesconectar();
@@ -156,26 +80,32 @@ public class Docente_administrador extends Usuario{
     
     public void Eliminardocentes(String cedula){
          Conexion miDbconn=new Conexion();              
-        try {                                                      
-             Statement pst = miDbconn.getConnection().createStatement();                                     
-             
-             pst.executeUpdate("update docente set estado=0  where cedula like '"+cedula+"'");
-              
-            JOptionPane.showMessageDialog(null, "Eliminado exitosamente");
+        try {  
+             PreparedStatement ConsultaPreparada=miDbconn.getConnection().prepareStatement("SELECT * FROM docente where cedula=? and estado like 1");
+            ConsultaPreparada.setString(1, cedula);
+                                    
+            ResultSet res=ConsultaPreparada.executeQuery();
+            if(res.next()){
+            
+             Statement pst = miDbconn.getConnection().createStatement();                                                  
+             pst.executeUpdate("update docente set estado=0  where cedula like '"+cedula+"'");              
+             JOptionPane.showMessageDialog(null, "Eliminado exitosamente");
             
             pst.close();
+            }else{JOptionPane.showMessageDialog(null, "El Docente no existe");}
+            ConsultaPreparada.close();
             miDbconn.getdesconectar();
             
         } catch (SQLException ex) {
             //Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);            
-            JOptionPane.showMessageDialog(null,"Error ya existe ", null, 0);
+            JOptionPane.showMessageDialog(null,"Falló", null, 0);
         }
     }
     
     public void Actualizardocente(Docente MiDocente){        
          Conexion miDbconn=new Conexion();              
         try { 
-            PreparedStatement ConsultaPreparada=miDbconn.getConnection().prepareStatement("SELECT * FROM docente where cedula=?");
+            PreparedStatement ConsultaPreparada=miDbconn.getConnection().prepareStatement("SELECT * FROM docente where cedula=? and estado like 1");
             ConsultaPreparada.setString(1, MiDocente.getCedula());
             ResultSet res=ConsultaPreparada.executeQuery();
             if(res.next()){
@@ -204,7 +134,21 @@ public class Docente_administrador extends Usuario{
     
     //  CRUD ESTUDIANTE
     
-    public void ConsultarEstudiante(){
+    public void ConsultarEstudiante(Estudiante myEstudiante){
+        Conexion miDbconn=new Conexion();              
+        try {              
+                 Statement pst = miDbconn.getConnection().createStatement();                                     
+                 pst.executeUpdate("INSERT INTO docente VALUES ('"+myEstudiante.getTI()+"','"+MiDocente.getNombre()+"','"+MiDocente.getApellido()+"','"+MiDocente.getEps()
+                         +"','"+MiDocente.getEstrato()+"','"+MiDocente.getGrado()+"','2019-04-04','1','"+MiDocente.getFormacion()+"','"+MiDocente.getPassword()+"','"+MiDocente.getTelefono()+"')");
+ 
+                JOptionPane.showMessageDialog(null, "La matricula re ha registrado exitosamente");
+
+            pst.close(); 
+            miDbconn.getdesconectar();
+        } catch (SQLException ex) {
+            //Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);            
+            JOptionPane.showMessageDialog(null,"Error ya existe ", null, 0);
+        }
         
     }
     public void CrearEstudiante(){

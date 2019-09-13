@@ -120,9 +120,44 @@ public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
        String selesccion2=JcomboCRUD_CUS.getSelectedItem().toString();
        switch(selesccion2){
            case "Crear Docente":{
-               java.awt.EventQueue.invokeLater(new Runnable() {
+               AbrirInterfazAdministracionDocente("Crear Docente");
+            break;
+           }
+           case "Consultar Docente":{
+               AbrirInterfazAdministracionDocente("Consultar Docente");
+            break;
+           }case "Eliminar Docente":{
+               AbrirInterfazAdministracionDocente("Eliminar Docente");
+            break;
+           }case "Actualizar Docente":{
+               AbrirInterfazAdministracionDocente("Actualizar Docente");
+            break;
+           }case "Crear Estudiante":{
+               AbrirInterfazAdministrarEstudiante("Crear Estudiante");
+            break;
+           }case "Actualizar Estudiante":{
+               AbrirInterfazAdministrarEstudiante("Actualizar Estudiante");
+            break;
+           }case "Eliminar Estudiante":{
+               AbrirInterfazAdministrarEstudiante("Eliminar Estudiante");
+            break;
+           }case "Consultar Estudiante":{
+               AbrirInterfazAdministrarEstudiante("Consultar Estudiante");
+            break;
+           }
+           
+           
+           
+           
+       }             
+    }//GEN-LAST:event_btnSiguiente2ActionPerformed
+        
+     //METODSO SE ENCARGA DE ABRIR LA INTERFAZ DE ADMINISTRACION DE DOCENTE
+    public void AbrirInterfazAdministracionDocente(String AccionArealizar){
+           java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    AgregarDocente dialog = new AgregarDocente(new javax.swing.JFrame(), true);
+                    //AgregarDocente myAgregarDocente= new AdministrarDocente("Crear Docente");
+                    AdministrarDocente dialog = new AdministrarDocente(new javax.swing.JFrame(), true,AccionArealizar);
                     dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                         @Override
                         public void windowClosing(java.awt.event.WindowEvent e) {
@@ -131,23 +166,27 @@ public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
                     });
                     dialog.setVisible(true);
                 }
-            });
-            break;
-           }
-           case "Consultar Docente":{
-            break;
-           }case "Eliminar Docente":{
-            break;
-           }case "Actualizar Docente":{
-            break;
-           }
-           
-           
-           
-           
+            });  
        }
-    }//GEN-LAST:event_btnSiguiente2ActionPerformed
-
+    
+    //METODO QUE SE ENCARGA DE ABRIR LA INTERFAZ  DE ADMINISTRAR STUDIANTE
+    
+    public void AbrirInterfazAdministrarEstudiante(String AccionArealizar){
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                AdministrarEstudiante dialog = new AdministrarEstudiante(new javax.swing.JFrame(), true,AccionArealizar);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        //System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> JcomboCRUD_CUS;
     private javax.swing.JButton btnSiguiente;

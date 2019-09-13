@@ -3,15 +3,60 @@ package vista;
 
 import Controlador.*;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 
-public class AgregarDocente extends javax.swing.JDialog {
+public class AdministrarDocente extends javax.swing.JDialog {
     Docente_administrador  myDocente_administrador;
-    public AgregarDocente(java.awt.Frame parent, boolean modal) {
+    String opcion;
+    
+    public AdministrarDocente(String opcion){
+            this.opcion=opcion;                    
+        }
+    public AdministrarDocente(java.awt.Frame parent, boolean modal,String opcion) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
+                
+        switch (opcion) {
+            case "Crear Docente":
+                btnActualizar.setEnabled(false);
+                btnEliminar.setEnabled(false);
+                btnBuscar.setEnabled(false);
+                break;  
+            case "Consultar Docente":
+                txtnombre.setEnabled(false);txtpassword.setEnabled(false);txteps.setEnabled(false);
+                txtformacion.setEnabled(false);txtTelefono.setEnabled(false);txtDireccion.setEnabled(false);txtApellido.setEnabled(false);
+                Jestrato.setEnabled(false);Jgrado.setEnabled(false);
+                
+                btnActualizar.setEnabled(false);
+                btnEliminar.setEnabled(false);
+                btnguardar.setEnabled(false);
+                break; 
+            case "Eliminar Docente":
+                txtnombre.setEnabled(false);txtpassword.setEnabled(false);txteps.setEnabled(false);
+                txtformacion.setEnabled(false);txtTelefono.setEnabled(false);txtDireccion.setEnabled(false);txtApellido.setEnabled(false);
+                Jestrato.setEnabled(false);Jgrado.setEnabled(false);
+                
+                btnActualizar.setEnabled(false);
+                btnguardar.setEnabled(false);
+                btnBuscar.setEnabled(false);
+                
+                break; 
+            case "Actualizar Docente":
+                btnguardar.setEnabled(false);
+                btnEliminar.setEnabled(false);
+                btnBuscar.setEnabled(false);
+                break; 
+        }
+       
     }
 
+        
+        
+             
+        
+        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -54,10 +99,27 @@ public class AgregarDocente extends javax.swing.JDialog {
                 txtcedulaActionPerformed(evt);
             }
         });
+        txtcedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcedulaKeyTyped(evt);
+            }
+        });
 
         jLabel3.setText("Nombres");
 
+        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombreKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("Primer Apellido ");
+
+        txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyTyped(evt);
+            }
+        });
 
         Jgrado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto" }));
         Jgrado.addItemListener(new java.awt.event.ItemListener() {
@@ -67,6 +129,12 @@ public class AgregarDocente extends javax.swing.JDialog {
         });
 
         jLabel9.setText("EPS ");
+
+        txteps.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtepsKeyTyped(evt);
+            }
+        });
 
         jLabel10.setText("Estrato ");
 
@@ -88,12 +156,35 @@ public class AgregarDocente extends javax.swing.JDialog {
                 txtformacionActionPerformed(evt);
             }
         });
+        txtformacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtformacionKeyTyped(evt);
+            }
+        });
 
         jLabel5.setText("Password");
 
+        txtpassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtpasswordKeyTyped(evt);
+            }
+        });
+
         jLabel7.setText("Telefono");
 
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
+
         jLabel8.setText("Direccion");
+
+        txtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionKeyTyped(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -234,12 +325,13 @@ public class AgregarDocente extends javax.swing.JDialog {
                     .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    login MyLogin = new login();
     private void txtcedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcedulaActionPerformed
         // TODO add your handling code here:
         
@@ -277,7 +369,8 @@ public class AgregarDocente extends javax.swing.JDialog {
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        myDocente_administrador.Eliminardocentes(txtcedula.getText());
+               Docente_administrador miDocente_administrador= new Docente_administrador();
+               miDocente_administrador.Eliminardocentes(txtcedula.getText());
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -303,6 +396,52 @@ public class AgregarDocente extends javax.swing.JDialog {
         myDocente_administrador = new Docente_administrador();
         myDocente_administrador.Actualizardocente(MyDocente);
     }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void txtcedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcedulaKeyTyped
+        MyLogin.Solonumeros(evt);
+        MyLogin.validarTamañoTXT(txtcedula,10, evt);
+    }//GEN-LAST:event_txtcedulaKeyTyped
+
+    private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
+        // TODO add your handling code here
+        MyLogin.Sololetras(evt);
+        MyLogin.validarTamañoTXT(txtnombre,30, evt);
+    }//GEN-LAST:event_txtnombreKeyTyped
+
+    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
+        // TODO add your handling code here:
+        MyLogin.Sololetras(evt);
+        MyLogin.validarTamañoTXT(txtApellido,30, evt);
+    }//GEN-LAST:event_txtApellidoKeyTyped
+
+    private void txtpasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasswordKeyTyped
+    
+        MyLogin.validarTamañoTXT(txtpassword,30, evt);
+    }//GEN-LAST:event_txtpasswordKeyTyped
+
+    private void txtepsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtepsKeyTyped
+        // TODO add your handling code here:
+        MyLogin.Sololetras(evt);
+        MyLogin.validarTamañoTXT(txteps,30, evt);
+    }//GEN-LAST:event_txtepsKeyTyped
+
+    private void txtformacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtformacionKeyTyped
+        // TODO add your handling code here:
+        MyLogin.Sololetras(evt);
+        MyLogin.validarTamañoTXT(txtformacion,30, evt);
+    }//GEN-LAST:event_txtformacionKeyTyped
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        // TODO add your handling code here:
+        MyLogin.Solonumeros(evt);
+        MyLogin.validarTamañoTXT(txtTelefono,15, evt);
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
+        // TODO add your handling code here:
+        
+        MyLogin.validarTamañoTXT(txtDireccion,30, evt);
+    }//GEN-LAST:event_txtDireccionKeyTyped
 
     
 
@@ -335,3 +474,4 @@ public class AgregarDocente extends javax.swing.JDialog {
     private javax.swing.JTextField txtpassword;
     // End of variables declaration//GEN-END:variables
 }
+

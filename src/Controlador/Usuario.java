@@ -5,7 +5,7 @@ import Modelo.Conexion;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
-import vista.AgregarDocente;
+import vista.AdministrarDocente;
 import vista.inicioAdmibnistradorDocente;
 
 
