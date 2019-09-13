@@ -136,11 +136,11 @@ public class Docente_administrador extends Usuario{
     
     public void ConsultarEstudiante(Estudiante myEstudiante){
         Conexion miDbconn=new Conexion();              
-        try {              
+        /*try {              
                  Statement pst = miDbconn.getConnection().createStatement();                                     
                  pst.executeUpdate("INSERT INTO docente VALUES ('"+myEstudiante.getTI()+"','"+MiDocente.getNombre()+"','"+MiDocente.getApellido()+"','"+MiDocente.getEps()
                          +"','"+MiDocente.getEstrato()+"','"+MiDocente.getGrado()+"','2019-04-04','1','"+MiDocente.getFormacion()+"','"+MiDocente.getPassword()+"','"+MiDocente.getTelefono()+"')");
- 
+
                 JOptionPane.showMessageDialog(null, "La matricula re ha registrado exitosamente");
 
             pst.close(); 
@@ -148,7 +148,7 @@ public class Docente_administrador extends Usuario{
         } catch (SQLException ex) {
             //Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);            
             JOptionPane.showMessageDialog(null,"Error ya existe ", null, 0);
-        }
+        }*/
         
     }
     public void CrearEstudiante(){
