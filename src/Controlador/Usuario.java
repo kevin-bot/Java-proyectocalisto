@@ -7,22 +7,42 @@ import javax.swing.JOptionPane;
 
 import vista.AgregarDocente;
 import vista.inicioAdmibnistradorDocente;
-import vista.iniciodocente;
+
 
 public  class Usuario {
     
-    protected String cedula,nombre,apellido,password,rol,telefono,direccion;
+    protected String cedula,nombre,apellido,eps,estrato,estado,password,telefono,direccion;
 
-    public Usuario(String cedula, String nombre, String apellido, String password, String rol,String telefono,  String direccion) {
+    //CONTRUCTOR TOTAL PARA ALMACENAR TODA LA INFROMACION DEL DOCENTE
+
+    public Usuario(String cedula, String nombre, String apellido, String eps, String estrato, String estado, String password, String telefono, String direccion) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.eps = eps;
+        this.estrato = estrato;
+        this.estado = estado;
         this.password = password;
-        this.rol = rol;        
-        this.telefono=telefono;
+        this.telefono = telefono;
+        this.direccion = direccion;
+    }
+    
+    
+    //CONSTRUCTOR  SOLO PARA INSERRCON YA QUE LA HORA Y LA FECHA SE HACE DIRECTAMENTE AL MOMENTO DE LA INSERRCION CON UN ESTADO 1 Y UNA FECHA CURRENTDATE
+
+    public Usuario(String cedula, String nombre, String apellido, String eps, String estrato, String password, String telefono, String direccion) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.eps = eps;
+        this.estrato = estrato;
+        this.password = password;
+        this.telefono = telefono;
         this.direccion = direccion;
     }
 
+    
+    
     public Usuario() {
     }
 
@@ -50,20 +70,36 @@ public  class Usuario {
         this.apellido = apellido;
     }
 
+    public String getEps() {
+        return eps;
+    }
+
+    public void setEps(String eps) {
+        this.eps = eps;
+    }
+
+    public String getEstrato() {
+        return estrato;
+    }
+
+    public void setEstrato(String estrato) {
+        this.estrato = estrato;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
     }
 
     public String getTelefono() {
@@ -81,6 +117,8 @@ public  class Usuario {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+
+   
 
     
     
@@ -110,18 +148,8 @@ public  class Usuario {
                 
                 if(database.equals("docente")){                    
                      
-                              java.awt.EventQueue.invokeLater(new Runnable() {
-                                public void run() {
-                                    iniciodocente dialog = new iniciodocente(new javax.swing.JFrame(), true);
-                                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                                        @Override
-                                        public void windowClosing(java.awt.event.WindowEvent e) {
-                                            //System.exit(0);
-                                        }
-                                    });
-                                    dialog.setVisible(true);
-                                }
-                            });    
+                              Docente mydocente= new Docente();
+                              mydocente.Administrar_notas();
                      
                 }else if(database.equals("administrador_docente")){
                     

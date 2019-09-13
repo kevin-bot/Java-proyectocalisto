@@ -13,15 +13,15 @@ public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboCUN = new javax.swing.JComboBox<>();
+        jComboCUN = new javax.swing.JComboBox<String>();
         jLabel1 = new javax.swing.JLabel();
-        JcomboCRUD_CUS = new javax.swing.JComboBox<>();
+        JcomboCRUD_CUS = new javax.swing.JComboBox<String>();
         btnSiguiente = new javax.swing.JButton();
         btnSiguiente2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jComboCUN.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrar matricula", "Administrar docente", "Administrar estudiante", "Administrar asignaturas" }));
+        jComboCUN.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrar docente", "Administrar estudiante", "Administrar asignaturas", "Administrar salones" }));
 
         jLabel1.setText("ADMINISTRADOR DOCENTE");
 
@@ -85,17 +85,7 @@ public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
         String seleccionCUN=jComboCUN.getSelectedItem().toString();
                 JcomboCRUD_CUS.setEnabled(true);
                 btnSiguiente2.setEnabled(true);
-        switch (seleccionCUN){
-            
-            case "Administrar matricula":{
-
-                JcomboCRUD_CUS.removeAllItems();
-                
-                JcomboCRUD_CUS.addItem("Crear matricula");
-                JcomboCRUD_CUS.addItem("Modificar matricula");
-                JcomboCRUD_CUS.addItem("Eliminar matricula");
-                JcomboCRUD_CUS.addItem("Actualizar matricula");
-                break;}
+        switch (seleccionCUN){                        
             case "Administrar docente":{
                 JcomboCRUD_CUS.removeAllItems();
                 
