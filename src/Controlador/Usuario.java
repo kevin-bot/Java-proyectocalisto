@@ -12,6 +12,7 @@ import vista.NotasQuinto;
 import vista.NotasSegundo;
 import vista.NotasTercero;
 import vista.inicioAdmibnistradorDocente;
+import vista.inicioDocente;
 
 
 public  class Usuario {
@@ -157,94 +158,23 @@ public  class Usuario {
                               mydocente.Administrar_notas();
                               
                               switch (res.getString("grado")){
-                                  case "1":
-                                        java.awt.EventQueue.invokeLater(new Runnable() {
-                                            public void run() {
-                                                NotasPrimero dialog = new NotasPrimero(new javax.swing.JFrame(), true);
-                                                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                                                    @Override
-                                                    public void windowClosing(java.awt.event.WindowEvent e) {
-                                                        //System.exit(0);
-                                                    }
-                                                });
-                                                dialog.setVisible(true);
-                                            }
-                                        });
+                                  case "1":                                     
+                                          abririntefazInicoDocente("1")  ;
                                       break;
                                   case "2": 
-                                      java.awt.EventQueue.invokeLater(new Runnable() {
-                                            public void run() {
-                                                NotasSegundo dialog = new NotasSegundo(new javax.swing.JFrame(), true);
-                                                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                                                    @Override
-                                                    public void windowClosing(java.awt.event.WindowEvent e) {
-                                                       // System.exit(0);
-                                                    }
-                                                });
-                                                dialog.setVisible(true);
-                                            }
-                                        });
+                                        abririntefazInicoDocente("2");
                                       break;
                                   case "3":  
-                                      java.awt.EventQueue.invokeLater(new Runnable() {
-                                            public void run() {
-                                                NotasTercero dialog = new NotasTercero(new javax.swing.JFrame(), true);
-                                                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                                                    @Override
-                                                    public void windowClosing(java.awt.event.WindowEvent e) {
-                                                        //System.exit(0);
-                                                    }
-                                                });
-                                                dialog.setVisible(true);
-                                            }
-                                        });
+                                      abririntefazInicoDocente("3");
                                       break;
                                   case "4":  
-                                      java.awt.EventQueue.invokeLater(new Runnable() {
-                                            public void run() {
-                                                NotasCuarto dialog = new NotasCuarto(new javax.swing.JFrame(), true);
-                                                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                                                    @Override
-                                                    public void windowClosing(java.awt.event.WindowEvent e) {
-                                                        //System.exit(0);
-                                                    }
-                                                });
-                                                dialog.setVisible(true);
-                                            }
-                                        });
+                                      abririntefazInicoDocente("5");
                                       break;
                                   case "5":    
-                                      java.awt.EventQueue.invokeLater(new Runnable() {
-                                        public void run() {
-                                            NotasQuinto dialog = new NotasQuinto(new javax.swing.JFrame(), true);
-                                            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                                                @Override
-                                                public void windowClosing(java.awt.event.WindowEvent e) {
-                                                  //  System.exit(0);
-                                                }
-                                            });
-                                            dialog.setVisible(true);
-                                        }
-                                    });
-                                      break; 
-                                  default: System.out.println("Falló");
+                                      abririntefazInicoDocente("6");                                     
                               }
                               
-                              
-                              
-                              
-                              
-                              
-                              
-                              
-                              
-                              
-                              
-                              
-                              
-                              
-                              
-                     
+
                 }else if(database.equals("administrador_docente")){
                     
                     System.out.println("si entro a aca");
@@ -278,7 +208,20 @@ public  class Usuario {
         
     }
     
-    
+  public void abririntefazInicoDocente(String Grado_del_docente){
+      java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            inicioDocente dialog = new inicioDocente(new javax.swing.JFrame(), true,Grado_del_docente);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                   // System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
+        }
+    });
+  }  
     
 }
 

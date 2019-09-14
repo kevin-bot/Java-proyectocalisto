@@ -10,6 +10,10 @@ public class Grado {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
+    
+    public Grado(String nombre){
+        this.nombre=nombre;
+    }
 
     public Grado() {
     }

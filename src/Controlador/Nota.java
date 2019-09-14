@@ -90,11 +90,11 @@ public class Nota {
         }
              
    }
-            
+      
    
-   public ArrayList<Materia> llenartablamateria (Object materia) {
-       
-       System.out.println(""+materia);
+   
+   public ArrayList<Materia> llenartablamateria (String materia) {
+            
        ArrayList<Materia>mimateria= new ArrayList<>();
         try {
             Conexion conex= new Conexion();
@@ -114,8 +114,8 @@ public class Nota {
                 asignatura.setNota6(res.getString(8));
                 asignatura.setNota7(res.getString(9));
                 asignatura.setNota8(res.getString(10));
-                 asignatura.setNota9(res.getString(11));
-                  asignatura.setNota10(res.getString(12));
+                asignatura.setNota9(res.getString(11));
+                asignatura.setNota10(res.getString(12));
                 mimateria.add(asignatura);
             }
             res.close();
@@ -126,7 +126,7 @@ public class Nota {
         }
              return mimateria;
    }
-   public ArrayList<Materia> llenartablamateria2 (Object materia) {
+   public ArrayList<Materia> llenartablamateria2 (String materia) {
        ArrayList<Materia>mimateria= new ArrayList<>();
         try {
             Conexion conex= new Conexion();
@@ -158,7 +158,7 @@ public class Nota {
         }
              return mimateria;
    }
-   public ArrayList<Materia> llenartablamateria3 (Object materia) {
+   public ArrayList<Materia> llenartablamateria3 (String materia) {
        ArrayList<Materia>mimateria= new ArrayList<>();
         try {
             Conexion conex= new Conexion();
@@ -190,7 +190,7 @@ public class Nota {
         }
              return mimateria;
    }
-   public ArrayList<Materia> llenartablamateria4 (Object materia) {
+   public ArrayList<Materia> llenartablamateria4 (String materia) {
        ArrayList<Materia>mimateria= new ArrayList<>();
         try {
             Conexion conex= new Conexion();
@@ -222,7 +222,7 @@ public class Nota {
         }
              return mimateria;
    }
-   public ArrayList<Materia> llenartablamateria5 (Object materia) {
+   public ArrayList<Materia> llenartablamateria5 (String materia) {
        ArrayList<Materia>mimateria= new ArrayList<>();
         try {
             Conexion conex= new Conexion();
@@ -254,6 +254,8 @@ public class Nota {
         }
              return mimateria;
    }
+   
+   
     
     public ArrayList<Estudiante>listaNombre () {
        ArrayList<Estudiante>mimateria= new ArrayList<>();
@@ -297,7 +299,7 @@ public class Nota {
     
     
     
-    public void insertarnota(Object nota, String TI, Object actividad, Object materia){
+    public void insertarnota(Object nota, String TI, Object actividad, String materia){
         try {
             Conexion conex= new Conexion();
             Statement estatuto = conex.getConnection().createStatement();
@@ -309,7 +311,7 @@ public class Nota {
             Logger.getLogger(Nota.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void actualizarnota(Object nota, String TI, Object actividad, Object materia){
+    public void actualizarnota(Object nota, String TI, Object actividad, String materia){
         try {
             Conexion conex= new Conexion();
             Statement estatuto = conex.getConnection().createStatement();
@@ -321,7 +323,7 @@ public class Nota {
             Logger.getLogger(Nota.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void eliminarnota (Object actividad, String TI, Object materia){
+    public void eliminarnota (Object actividad, String TI, String materia){
          try {
             Conexion conex= new Conexion();
             Statement estatuto = conex.getConnection().createStatement();

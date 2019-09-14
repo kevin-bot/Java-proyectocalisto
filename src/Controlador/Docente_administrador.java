@@ -151,8 +151,21 @@ public class Docente_administrador extends Usuario{
         }*/
         
     }
-    public void CrearEstudiante(){
-        
+    public void CrearEstudiante(Estudiante myEstudiante){
+        Conexion miDbconn=new Conexion();          
+        try {              
+                 Statement pst = miDbconn.getConnection().createStatement();                                     
+                 pst.executeUpdate("INSERT INTO estudiante VALUES ('"+myEstudiante.getIt()+"','"+myEstudiante.getNombre()+"','"+myEstudiante.getApellido()
+                         +"','"+myEstudiante.getEps()+"','"+myEstudiante.getStrato()+"','"+myEstudiante.getGrado().getNombre()+"','2019','1')");
+
+                JOptionPane.showMessageDialog(null, "La matricula re ha registrado exitosamente");
+
+            pst.close(); 
+            miDbconn.getdesconectar();
+        } catch (SQLException ex) {
+            //Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);            
+            JOptionPane.showMessageDialog(null,"Error ya existe ", null, 0);
+        }
     }
     public void EliminarEstudiante(){
     

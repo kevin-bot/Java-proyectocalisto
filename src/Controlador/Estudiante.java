@@ -3,20 +3,52 @@ package Controlador;
 
 public class Estudiante {
 
-    String it,nombre,estado,año,matricula;
+    String it,nombre,apellido,eps,estado,strato,año;
     Grado grado;
 
-    public Estudiante(String it, String nombre, String estado, String año, String matricula, Grado grado) {
+    public Estudiante(String it, String nombre, String apellido, String eps, String estado, String strato, String año, Grado grado) {
         this.it = it;
         this.nombre = nombre;
+        this.apellido = apellido;
+        this.eps = eps;
         this.estado = estado;
+        this.strato = strato;
         this.año = año;
-        this.matricula = matricula;
         this.grado = grado;
     }
 
+    public Estudiante(String it, String nombre, String apellido, String eps, String strato, Grado grado) {
+        this.it = it;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.eps = eps;
+        this.strato = strato;
+        this.grado = grado;
+    }
+
+    public String getStrato() {
+        return strato;
+    }
+
+    public void setStrato(String strato) {
+        this.strato = strato;
+    }
+
+    
+
+   
+
     public Estudiante() {
     }
+
+    public String getEps() {
+        return eps;
+    }
+
+    public void setEps(String eps) {
+        this.eps = eps;
+    }
+    
 
     public String getIt() {
         return it;
@@ -34,6 +66,14 @@ public class Estudiante {
         this.nombre = nombre;
     }
 
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
     public String getEstado() {
         return estado;
     }
@@ -49,14 +89,7 @@ public class Estudiante {
     public void setAño(String año) {
         this.año = año;
     }
-
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
+   
 
     public Grado getGrado() {
         return grado;
@@ -65,5 +98,7 @@ public class Estudiante {
     public void setGrado(Grado grado) {
         this.grado = grado;
     }
+
+
     
 }

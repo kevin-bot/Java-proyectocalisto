@@ -5,6 +5,10 @@
  */
 package vista;
 
+import Controlador.Docente_administrador;
+import Controlador.Estudiante;
+import Controlador.Grado;
+
 /**
  *
  * @author DAGonzalezH
@@ -289,6 +293,10 @@ public class AdministrarEstudiante extends javax.swing.JDialog {
             case "Quinto": grado="5";
             break;
         }
+        Grado myGrado= new Grado(grado);
+        Estudiante myEstudiante= new Estudiante(txtTI.getText(), txtnombre.getText(), txtapellido.getText(), txteps.getText(),Jestrato.getSelectedItem().toString(),myGrado);
+        Docente_administrador myDocente_administrador= new Docente_administrador();
+        myDocente_administrador.CrearEstudiante(myEstudiante);
         
     }//GEN-LAST:event_btnguardarActionPerformed
 

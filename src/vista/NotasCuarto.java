@@ -19,6 +19,11 @@ public class NotasCuarto extends javax.swing.JDialog {
     /**
      * Creates new form NotasCuarto
      */
+    
+    public NotasCuarto() {
+    }
+
+    
      Nota minota= new Nota();
    int grado=4;
     public NotasCuarto(java.awt.Frame parent, boolean modal) {
@@ -200,7 +205,7 @@ public class NotasCuarto extends javax.swing.JDialog {
     private void btnmateriaconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmateriaconsultarActionPerformed
         // TODO add your handling code here:
         Object materia= jcbprimero.getSelectedItem();
-        ArrayList<Materia>llenartabla=minota.llenartablamateria4(materia);
+        ArrayList<Materia>llenartabla=minota.llenartablamateria4(tranformarAsignatura());
 
         llenarjlist(llenartabla);
     }//GEN-LAST:event_btnmateriaconsultarActionPerformed
@@ -211,9 +216,9 @@ public class NotasCuarto extends javax.swing.JDialog {
         String TI= txtTI.getText();
         Object actividad= jcbactividades.getSelectedItem();
         Object materia= jcbprimero.getSelectedItem();
-        JOptionPane.showMessageDialog(null, "eooo"+materia);
-        minota.insertarnota(nota, TI, actividad, materia);
-        ArrayList<Materia>llenartabla=minota.llenartablamateria4(materia);
+        
+        minota.insertarnota(nota, TI, actividad,tranformarAsignatura() );
+        ArrayList<Materia>llenartabla=minota.llenartablamateria4(tranformarAsignatura());
 
         llenarjlist(llenartabla);
         jcbactividades.setSelectedIndex(0);
@@ -227,9 +232,9 @@ public class NotasCuarto extends javax.swing.JDialog {
         String TI= txtTI.getText();
         Object actividad= jcbactividades.getSelectedItem();
         Object materia= jcbprimero.getSelectedItem();
-        JOptionPane.showMessageDialog(null, "eooo"+materia);
-        minota.actualizarnota(nota, TI, actividad, materia);
-        ArrayList<Materia>llenartabla=minota.llenartablamateria4(materia);
+        
+        minota.actualizarnota(nota, TI, actividad, tranformarAsignatura());
+        ArrayList<Materia>llenartabla=minota.llenartablamateria4(tranformarAsignatura());
 
         llenarjlist(llenartabla);
         jcbactividades.setSelectedIndex(0);
@@ -242,9 +247,9 @@ public class NotasCuarto extends javax.swing.JDialog {
         String TI= txttieliminar.getText();
         Object actividad= jcbactieliminar.getSelectedItem();
         Object materia= jcbprimero.getSelectedItem();
-        JOptionPane.showMessageDialog(null, "eooo"+TI+actividad+materia);
-        minota.eliminarnota(actividad, TI, materia);
-        ArrayList<Materia>llenartabla=minota.llenartablamateria4(materia);
+        
+        minota.eliminarnota(actividad, TI, tranformarAsignatura());
+        ArrayList<Materia>llenartabla=minota.llenartablamateria4(tranformarAsignatura());
 
         llenarjlist(llenartabla);
         txttieliminar.setText("");
@@ -406,6 +411,48 @@ public class NotasCuarto extends javax.swing.JDialog {
         }
                 
     }
+    
+    //METODO QUE SE ENCARGA DE TRANSFORMAR LAS ASIGNATURAS CON ESPACIO A SIN ESPACIO
+    public String tranformarAsignatura(){
+         String Asignatura="";
+         switch (jcbprimero.getSelectedItem().toString()){
+             
+                 case "Español" :
+                     Asignatura="español";
+                 break;
+                 case "Matematicas" :
+                 Asignatura="matematicas";
+                 break;
+                 case "Ciencias Naturales" :
+                 Asignatura="cienciasnaturales";
+                 break;
+                 case "Artistica" :
+                 Asignatura="artistica";
+                 break;
+                 case "Educacion Fisica" :
+                 Asignatura="educacionfisica";
+                 break;
+                 case "Ingles" :
+                 Asignatura="ingles";
+                 break;
+                 case "Lecto escritura" :
+                 Asignatura="lectoescritura";
+                 break;
+                 case "Etica y Valores" :
+                 Asignatura="eticayvalores";
+                 break;
+                  case "Religion" :
+                 Asignatura="religion";
+                 break;
+                     
+                  case "Ciencias Sociales" :
+                 Asignatura="cienciassociales"; 
+                 break;
+                 default: JOptionPane.showMessageDialog(null, "Por favor seleccione una asignatura");
+                                             
+         }
+         return  Asignatura;
+     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnactualizar;
     private javax.swing.JButton btneliminar;

@@ -30,13 +30,45 @@ public class NotasPrimero extends javax.swing.JDialog {
     Nota minota= new Nota();
     int grado=1;
     ArrayList<Estudiante>llenartabla2=minota.listaNombre();
-    public NotasPrimero(java.awt.Frame parent, boolean modal) {
+    public NotasPrimero(java.awt.Frame parent, boolean modal,String Opcion_de_crud) {
         super(parent, modal);
         initComponents();
         minota.llenarprimero(jcbprimero,grado);
        
-        //llenarjlist3();
+        switch(Opcion_de_crud){
+                case "Crear nota estudiante":{
+                    btnactualizar.setEnabled(false);
+                    txttieliminar.setEnabled(false);
+                    jcbactieliminar.setEnabled(false);
+                    btneliminar.setEnabled(false);
+                break;
+               }
+               case "Consultar nota estudiante":{
+                    btnactualizar.setEnabled(false);
+                    txttieliminar.setEnabled(false);
+                    jcbactieliminar.setEnabled(false);
+                    btneliminar.setEnabled(false);
+                    btninsertarnota.setEnabled(false); 
+                break;
+               }case "Eliminar nota estudiante":{
+                    btninsertarnota.setEnabled(false);                    
+                    btnactualizar.setEnabled(false);
+                    jcbactividades.setEnabled(false);                        
+                    txtTI.setEnabled(false);
+                    jcbnotas.setEnabled(false);                    
+                break;
+               }case "Actualizar Docente":{
+                    btninsertarnota.setEnabled(false);                                                                                
+                    txttieliminar.setEnabled(false);
+                    jcbactieliminar.setEnabled(false);
+                    btneliminar.setEnabled(false);
+                break;
+               }
+        }
         
+    }
+
+    public NotasPrimero() {
     }
 
    
@@ -46,7 +78,7 @@ public class NotasPrimero extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableprimero = new javax.swing.JTable();
-        jcbprimero = new javax.swing.JComboBox<>();
+        jcbprimero = new javax.swing.JComboBox<String>();
         jLabel1 = new javax.swing.JLabel();
         btnmateriaconsultar = new javax.swing.JButton();
         btninsertarnota = new javax.swing.JButton();
@@ -54,11 +86,15 @@ public class NotasPrimero extends javax.swing.JDialog {
         btneliminar = new javax.swing.JButton();
         txtTI = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jcbnotas = new javax.swing.JComboBox<>();
-        jcbactividades = new javax.swing.JComboBox<>();
+        jcbnotas = new javax.swing.JComboBox<String>();
+        jcbactividades = new javax.swing.JComboBox<String>();
         txttieliminar = new javax.swing.JTextField();
-        jcbactieliminar = new javax.swing.JComboBox<>();
+        jcbactieliminar = new javax.swing.JComboBox<String>();
         jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -82,8 +118,6 @@ public class NotasPrimero extends javax.swing.JDialog {
             }
         });
         jScrollPane1.setViewportView(jTableprimero);
-
-        jcbprimero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Asignaturas" }));
 
         jLabel1.setText("PRIMER-GRADO");
 
@@ -117,11 +151,27 @@ public class NotasPrimero extends javax.swing.JDialog {
 
         jLabel2.setText("TI");
 
-        jcbnotas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Notas", "1", "2", "3", "4", "5" }));
+        jcbnotas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
 
-        jcbactividades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Actividades", "nota1", "nota2", "nota3", "nota4", "nota5", "nota6", "nota7", "nota8", "nota9", "nota10" }));
+        jcbactividades.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nota1", "nota2", "nota3", "nota4", "nota5", "nota6", "nota7", "nota8", "nota9", "nota10" }));
+        jcbactividades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbactividadesActionPerformed(evt);
+            }
+        });
 
-        jcbactieliminar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Actividades", "nota1", "nota2", "nota3", "nota4", "nota5", "nota6", "nota7", "nota8", "nota9", "nota10" }));
+        txttieliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttieliminarActionPerformed(evt);
+            }
+        });
+
+        jcbactieliminar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nota1", "nota2", "nota3", "nota4", "nota5", "nota6", "nota7", "nota8", "nota9", "nota10" }));
+        jcbactieliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbactieliminarActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("LIMPIAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -130,116 +180,147 @@ public class NotasPrimero extends javax.swing.JDialog {
             }
         });
 
+        jLabel3.setText("Nota");
+
+        jLabel4.setText("Actividad");
+
+        jLabel5.setText("TI");
+
+        jLabel6.setText("Actividad");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(btninsertarnota)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTI, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)))
-                .addGap(18, 18, 18)
-                .addComponent(jcbnotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jcbactividades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(btnactualizar)
-                .addGap(87, 87, 87)
-                .addComponent(txttieliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jcbactieliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btneliminar)
-                .addGap(75, 75, 75))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addComponent(jButton1)
-                        .addGap(87, 87, 87)
-                        .addComponent(jcbprimero, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnmateriaconsultar)
-                        .addGap(109, 109, 109))))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1086, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1089, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(459, 459, 459)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(68, 68, 68)
+                            .addComponent(jButton1)
+                            .addGap(87, 87, 87)
+                            .addComponent(jcbprimero, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(910, 910, 910)
+                            .addComponent(btnmateriaconsultar))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(21, 21, 21)
+                            .addComponent(btninsertarnota)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(4, 4, 4)
+                            .addComponent(txtTI, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(21, 21, 21)
+                            .addComponent(jLabel3)
+                            .addGap(18, 18, 18)
+                            .addComponent(jcbnotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel4)
+                            .addGap(18, 18, 18)
+                            .addComponent(jcbactividades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(27, 27, 27)
+                            .addComponent(btnactualizar)
+                            .addGap(54, 54, 54)
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txttieliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jcbactieliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btneliminar))))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbprimero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel1))
+                    .addComponent(jButton1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jcbprimero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(11, 11, 11)
                 .addComponent(btnmateriaconsultar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGap(11, 11, 11)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btninsertarnota)
-                    .addComponent(btnactualizar)
-                    .addComponent(btneliminar)
-                    .addComponent(txtTI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbnotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbactividades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txttieliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbactieliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addContainerGap())
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(btninsertarnota))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(txtTI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jcbnotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbactividades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnactualizar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txttieliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jcbactieliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btneliminar))))
+                .addGap(4, 4, 4))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnmateriaconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmateriaconsultarActionPerformed
-        // TODO add your handling code here:
-        Object materia= jcbprimero.getSelectedItem();
-      ArrayList<Materia>llenartabla=minota.llenartablamateria(materia);
-      
-        llenarjlist(llenartabla);
+        // TODO add your handling code here:                
+      ArrayList<Materia>llenartabla=minota.llenartablamateria(tranformarAsignatura());
+      llenarjlist(llenartabla);
     }//GEN-LAST:event_btnmateriaconsultarActionPerformed
 
     private void btninsertarnotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninsertarnotaActionPerformed
         // TODO add your handling code here:
+        if(txtTI.getText().equals("")){JOptionPane.showMessageDialog(null, "Por favor ingrese el documento del estudiante");
+        }else{
         Object nota=jcbnotas.getSelectedItem();
         String TI= txtTI.getText();
         Object actividad= jcbactividades.getSelectedItem();
-        Object materia= jcbprimero.getSelectedItem();
-        JOptionPane.showMessageDialog(null, "eooo"+materia);
-        minota.insertarnota(nota, TI, actividad, materia);
-         ArrayList<Materia>llenartabla=minota.llenartablamateria(materia);
+                
+        minota.insertarnota(nota, TI, actividad, tranformarAsignatura());
+         ArrayList<Materia>llenartabla=minota.llenartablamateria(tranformarAsignatura());
       
         llenarjlist(llenartabla);
          jcbactividades.setSelectedIndex(0);
         jcbnotas.setSelectedIndex(0);
         txtTI.setText("");
+        }
     }//GEN-LAST:event_btninsertarnotaActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         // TODO add your handling code here:
+         if(txttieliminar.getText().equals("")){JOptionPane.showMessageDialog(null, "Por favor ingrese el documento del estudiante");
+        }else{
          String TI= txttieliminar.getText();
-        Object actividad= jcbactieliminar.getSelectedItem();
-        Object materia= jcbprimero.getSelectedItem();
-        JOptionPane.showMessageDialog(null, "eooo"+TI+actividad+materia);
-        minota.eliminarnota(actividad, TI, materia);
-         ArrayList<Materia>llenartabla=minota.llenartablamateria(materia);
+        Object actividad= jcbactieliminar.getSelectedItem();               
+        minota.eliminarnota(actividad, TI, tranformarAsignatura());
+         ArrayList<Materia>llenartabla=minota.llenartablamateria(tranformarAsignatura());
       
         llenarjlist(llenartabla);
         txttieliminar.setText("");
         jcbactieliminar.setSelectedIndex(0);
+         }
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -249,19 +330,32 @@ public class NotasPrimero extends javax.swing.JDialog {
 
     private void btnactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactualizarActionPerformed
         // TODO add your handling code here:
+         if(txtTI.getText().equals("")){JOptionPane.showMessageDialog(null, "Por favor ingrese el documento del estudiante");
+        }else{
          Object nota=jcbnotas.getSelectedItem();
         String TI= txtTI.getText();
-        Object actividad= jcbactividades.getSelectedItem();
-        Object materia= jcbprimero.getSelectedItem();
-        JOptionPane.showMessageDialog(null, "eooo"+materia);
-        minota.actualizarnota(nota, TI, actividad, materia);
-         ArrayList<Materia>llenartabla=minota.llenartablamateria(materia);
+        Object actividad= jcbactividades.getSelectedItem();        
+        minota.actualizarnota(nota, TI, actividad, tranformarAsignatura());
+         ArrayList<Materia>llenartabla=minota.llenartablamateria(tranformarAsignatura());
       
         llenarjlist(llenartabla);
         jcbactividades.setSelectedIndex(0);
         jcbnotas.setSelectedIndex(0);
         txtTI.setText("");
+         }
     }//GEN-LAST:event_btnactualizarActionPerformed
+
+    private void jcbactividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbactividadesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbactividadesActionPerformed
+
+    private void txttieliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttieliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttieliminarActionPerformed
+
+    private void jcbactieliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbactieliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbactieliminarActionPerformed
 
    
     public void limpiarjlist(){
@@ -442,7 +536,48 @@ public class NotasPrimero extends javax.swing.JDialog {
     
                 
     
-
+        //METODO QUE SE ENCARGA DE TRANSFORMAR LAS ASIGNATURAS CON ESPACIO A SIN ESPACIO
+     
+     public String tranformarAsignatura(){
+         String Asignatura="";
+         switch (jcbprimero.getSelectedItem().toString()){
+             
+                 case "Español" :
+                     Asignatura="español";
+                 break;
+                 case "Matematicas" :
+                 Asignatura="matematicas";
+                 break;
+                 case "Ciencias Naturales" :
+                 Asignatura="cienciasnaturales";
+                 break;
+                 case "Artistica" :
+                 Asignatura="artistica";
+                 break;
+                 case "Educacion Fisica" :
+                 Asignatura="educacionfisica";
+                 break;
+                 case "Ingles" :
+                 Asignatura="ingles";
+                 break;
+                 case "Lecto escritura" :
+                 Asignatura="lectoescritura";
+                 break;
+                 case "Etica y Valores" :
+                 Asignatura="eticayvalores";
+                 break;
+                  case "Religion" :
+                 Asignatura="religion";
+                 break;
+                     
+                  case "Ciencias Sociales" :
+                 Asignatura="cienciassociales"; 
+                 break;
+                 default: JOptionPane.showMessageDialog(null, "Por favor seleccione una asignatura");
+                                             
+         }
+         return  Asignatura;
+     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnactualizar;
@@ -452,6 +587,10 @@ public class NotasPrimero extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableprimero;
     private javax.swing.JComboBox<String> jcbactieliminar;
