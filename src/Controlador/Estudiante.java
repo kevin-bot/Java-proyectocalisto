@@ -3,10 +3,9 @@ package Controlador;
 
 public class Estudiante {
 
-    String it,nombre,apellido,eps,estado,strato,año;
-    Grado grado;
+    String it,nombre,apellido,eps,estado,strato,año,grado;
 
-    public Estudiante(String it, String nombre, String apellido, String eps, String estado, String strato, String año, Grado grado) {
+    public Estudiante(String it, String nombre, String apellido, String eps, String estado, String strato, String año, String grado) {
         this.it = it;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -16,8 +15,11 @@ public class Estudiante {
         this.año = año;
         this.grado = grado;
     }
+    
 
-    public Estudiante(String it, String nombre, String apellido, String eps, String strato, Grado grado) {
+    
+
+    public Estudiante(String it, String nombre, String apellido, String eps, String strato, String grado) {
         this.it = it;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -91,11 +93,11 @@ public class Estudiante {
     }
    
 
-    public Grado getGrado() {
+    public String getGrado() {
         return grado;
     }
 
-    public void setGrado(Grado grado) {
+    public void setGrado(String grado) {
         this.grado = grado;
     }
 

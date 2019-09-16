@@ -1,6 +1,8 @@
 
 package vista;
 
+import javax.swing.JOptionPane;
+
 public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
 
     public inicioAdmibnistradorDocente(java.awt.Frame parent, boolean modal) {
@@ -124,12 +126,25 @@ public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
             break;
            }
            case "Consultar Docente":{
-               AbrirInterfazAdministracionDocente("Consultar Docente");
+               //AbrirInterfazAdministracionDocente("Consultar Docente");
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        MostrarDocentes dialog = new MostrarDocentes(new javax.swing.JFrame(), true);
+                        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                            @Override
+                            public void windowClosing(java.awt.event.WindowEvent e) {
+                                //System.exit(0);
+                            }
+                        });
+                        dialog.setVisible(true);
+                    }
+                });
             break;
            }case "Eliminar Docente":{
                AbrirInterfazAdministracionDocente("Eliminar Docente");
             break;
            }case "Actualizar Docente":{
+              // JOptionPane.showInputDialog("Por favor ingrese el numero de la cedula del docente a actualizar");
                AbrirInterfazAdministracionDocente("Actualizar Docente");
             break;
            }case "Crear Estudiante":{

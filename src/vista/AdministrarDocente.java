@@ -2,6 +2,8 @@
 package vista;
 
 import Controlador.*;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -17,21 +19,19 @@ public class AdministrarDocente extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-                
+          myDocente_administrador= new Docente_administrador();
+          myDocente_administrador.BuscarDocenteLenarJcombo(txtcedula);
         switch (opcion) {
             case "Crear Docente":
+                txtcedula.setVisible(false);
+                btnBuscar.setVisible(false);
                 btnActualizar.setEnabled(false);
                 btnEliminar.setEnabled(false);
-                btnBuscar.setEnabled(false);
+                txtCedulaCrear.setVisible(true);
+                
                 break;  
             case "Consultar Docente":
-                txtnombre.setEnabled(false);txtpassword.setEnabled(false);txteps.setEnabled(false);
-                txtformacion.setEnabled(false);txtTelefono.setEnabled(false);txtDireccion.setEnabled(false);txtApellido.setEnabled(false);
-                Jestrato.setEnabled(false);Jgrado.setEnabled(false);
                 
-                btnActualizar.setEnabled(false);
-                btnEliminar.setEnabled(false);
-                btnguardar.setEnabled(false);
                 break; 
             case "Eliminar Docente":
                 txtnombre.setEnabled(false);txtpassword.setEnabled(false);txteps.setEnabled(false);
@@ -40,13 +40,13 @@ public class AdministrarDocente extends javax.swing.JDialog {
                 
                 btnActualizar.setEnabled(false);
                 btnguardar.setEnabled(false);
-                btnBuscar.setEnabled(false);
+                txtCedulaCrear.setVisible(false);btnBuscar.setEnabled(false);
                 
                 break; 
             case "Actualizar Docente":
                 btnguardar.setEnabled(false);
                 btnEliminar.setEnabled(false);
-                btnBuscar.setEnabled(false);
+                txtCedulaCrear.setVisible(false);
                 break; 
         }
        
@@ -64,7 +64,6 @@ public class AdministrarDocente extends javax.swing.JDialog {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtcedula = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtnombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -85,25 +84,16 @@ public class AdministrarDocente extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
+        txtcedula = new javax.swing.JComboBox<>();
+        btnBuscar = new javax.swing.JButton();
+        txtCedulaCrear = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("AGREGAR DOCENTE");
 
         jLabel2.setText("Cédula ");
-
-        txtcedula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcedulaActionPerformed(evt);
-            }
-        });
-        txtcedula.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtcedulaKeyTyped(evt);
-            }
-        });
 
         jLabel3.setText("Nombres");
 
@@ -193,12 +183,28 @@ public class AdministrarDocente extends javax.swing.JDialog {
             }
         });
 
-        btnBuscar.setText("Buscar");
-
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
+            }
+        });
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        txtCedulaCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedulaCrearActionPerformed(evt);
+            }
+        });
+        txtCedulaCrear.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCedulaCrearKeyTyped(evt);
             }
         });
 
@@ -207,66 +213,65 @@ public class AdministrarDocente extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(240, 240, 240)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCedulaCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(txteps, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(Jestrato, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(Jgrado, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(txtformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14)
-                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(4, 4, 4)
-                                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(54, 54, 54))
+                        .addGap(110, 110, 110)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(txteps, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
+                .addComponent(Jestrato, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(Jgrado, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,21 +281,25 @@ public class AdministrarDocente extends javax.swing.JDialog {
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(11, 11, 11)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addComponent(txtCedulaCrear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel4))
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
+                        .addGap(8, 8, 8)
                         .addComponent(jLabel5))
                     .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
@@ -300,7 +309,7 @@ public class AdministrarDocente extends javax.swing.JDialog {
                         .addComponent(jLabel9))
                     .addComponent(txteps, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
+                        .addGap(1, 1, 1)
                         .addComponent(jLabel10))
                     .addComponent(Jestrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
@@ -309,9 +318,11 @@ public class AdministrarDocente extends javax.swing.JDialog {
                         .addGap(10, 10, 10)
                         .addComponent(jLabel11))
                     .addComponent(Jgrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,21 +333,14 @@ public class AdministrarDocente extends javax.swing.JDialog {
                             .addComponent(jLabel8))))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     login MyLogin = new login();
-    private void txtcedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcedulaActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_txtcedulaActionPerformed
-
     private void JgradoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JgradoItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_JgradoItemStateChanged
@@ -346,7 +350,11 @@ public class AdministrarDocente extends javax.swing.JDialog {
     }//GEN-LAST:event_txtformacionActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-         
+        if(txtformacion.getText().equals("") || txtcedula.getSelectedItem().toString().equals("") || txtnombre.getText().equals("") || 
+                txtApellido.getText().equals("")||txteps.getText().equals("")|| Jestrato.getSelectedItem().toString().equals("")
+                ||txtpassword.getText().equals("")|| txtTelefono.getText().equals("")||txtDireccion.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Todos los campos son obligatorios",null,2);
+        }else{
            String grado="";
         switch(Jgrado.getSelectedItem().toString()){
             case "Primero": grado="1";
@@ -361,20 +369,32 @@ public class AdministrarDocente extends javax.swing.JDialog {
                 break;                          
         }
         Docente MyDocente= new Docente(grado, txtformacion.getText(),
-                txtcedula.getText(), txtnombre.getText(),txtApellido.getText(),txteps.getText(), Jestrato.getSelectedItem().toString()
+                txtCedulaCrear.getText(), txtnombre.getText(),txtApellido.getText(),txteps.getText(), Jestrato.getSelectedItem().toString()
                 ,txtpassword.getText(), txtTelefono.getText(),txtDireccion.getText());
         
          myDocente_administrador= new Docente_administrador();
          myDocente_administrador.Creardocente(MyDocente);
+        }
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-               Docente_administrador miDocente_administrador= new Docente_administrador();
-               miDocente_administrador.Eliminardocentes(txtcedula.getText());
+        if( txtcedula.getSelectedItem().toString().equals("")){
+            JOptionPane.showMessageDialog(null,"Todos los campos son obligatorios",null,0);
+        }else{      
+        
+            Docente_administrador miDocente_administrador= new Docente_administrador();
+               miDocente_administrador.Eliminardocentes(txtcedula.getSelectedItem().toString());
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-           String grado="";
+           if(txtformacion.getText().equals("") || txtcedula.getSelectedItem().toString().equals("") || txtnombre.getText().equals("") || 
+                txtApellido.getText().equals("")||txteps.getText().equals("")|| Jestrato.getSelectedItem().toString().equals("")
+                ||txtpassword.getText().equals("")|| txtTelefono.getText().equals("")||txtDireccion.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Todos los campos son obligatorios",null,0);
+        }else{
+        
+        String grado="";
            
         switch(Jgrado.getSelectedItem().toString()){
             case "Primero": grado="1";
@@ -389,18 +409,15 @@ public class AdministrarDocente extends javax.swing.JDialog {
                 break;                          
         }
         
-        Docente MyDocente= new Docente(grado, txtformacion.getText(),
-                txtcedula.getText(), txtnombre.getText(),txtApellido.getText(),txteps.getText(), Jestrato.getSelectedItem().toString()
-                ,txtpassword.getText(), txtTelefono.getText(),txtDireccion.getText()); 
-        
-        myDocente_administrador = new Docente_administrador();
-        myDocente_administrador.Actualizardocente(MyDocente);
-    }//GEN-LAST:event_btnActualizarActionPerformed
+                Docente MyDocente= new Docente(grado, txtformacion.getText(),
+                        txtcedula.getSelectedItem().toString(), txtnombre.getText(),txtApellido.getText(),txteps.getText(), Jestrato.getSelectedItem().toString()
+                        ,txtpassword.getText(), txtTelefono.getText(),txtDireccion.getText()); 
 
-    private void txtcedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcedulaKeyTyped
-        MyLogin.Solonumeros(evt);
-        MyLogin.validarTamañoTXT(txtcedula,10, evt);
-    }//GEN-LAST:event_txtcedulaKeyTyped
+                myDocente_administrador = new Docente_administrador();
+                
+                myDocente_administrador.Actualizardocente(MyDocente);
+           }
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
         // TODO add your handling code here
@@ -443,6 +460,40 @@ public class AdministrarDocente extends javax.swing.JDialog {
         MyLogin.validarTamañoTXT(txtDireccion,30, evt);
     }//GEN-LAST:event_txtDireccionKeyTyped
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        myDocente_administrador= new Docente_administrador();
+           
+           ArrayList<Docente> listaPersonas =myDocente_administrador.BuscarCedulaDocenteAModificar(txtcedula.getSelectedItem().toString());      
+           System.out.println(" el dato que  se mada es "+txtcedula.getSelectedItem().toString());
+        if (listaPersonas.size()>0) {
+            System.out.println("la longitud si es mayor que cero");
+   //se recorre la lista de personas asignandose cada posicion en un objeto persona
+   for (int i = 0; i < listaPersonas.size(); i++) {
+            Docente miDocente= new Docente();
+            miDocente=listaPersonas.get(i); 
+            
+            txtApellido.setText(miDocente.getApellido());
+            txtDireccion.setText(miDocente.getDireccion());
+            txteps.setText(miDocente.getEps());
+           txtpassword.setText(miDocente.getPassword());
+           txtnombre.setText(miDocente.getNombre());
+           txtformacion.setText(miDocente.getFormacion());
+           txtTelefono.setText(miDocente.getTelefono());
+           
+            
+           }
+          }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtCedulaCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaCrearActionPerformed
+       
+    }//GEN-LAST:event_txtCedulaCrearActionPerformed
+
+    private void txtCedulaCrearKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaCrearKeyTyped
+        MyLogin.Solonumeros(evt);
+        MyLogin.validarTamañoTXT(txtCedulaCrear, 12, evt);
+    }//GEN-LAST:event_txtCedulaCrearKeyTyped
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -465,9 +516,10 @@ public class AdministrarDocente extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtCedulaCrear;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtTelefono;
-    private javax.swing.JTextField txtcedula;
+    private javax.swing.JComboBox<String> txtcedula;
     private javax.swing.JTextField txteps;
     private javax.swing.JTextField txtformacion;
     private javax.swing.JTextField txtnombre;
