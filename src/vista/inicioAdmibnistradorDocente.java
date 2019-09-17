@@ -1,6 +1,12 @@
 
 package vista;
 
+import Modelo.Conexion;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
@@ -15,15 +21,15 @@ public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboCUN = new javax.swing.JComboBox<String>();
+        jComboCUN = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        JcomboCRUD_CUS = new javax.swing.JComboBox<String>();
+        JcomboCRUD_CUS = new javax.swing.JComboBox<>();
         btnSiguiente = new javax.swing.JButton();
         btnSiguiente2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jComboCUN.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrar docente", "Administrar estudiante", "Administrar asignaturas", "Administrar salones" }));
+        jComboCUN.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrar docente", "Administrar estudiante", "Administrar Aulas" }));
 
         jLabel1.setText("ADMINISTRADOR DOCENTE");
 
@@ -105,13 +111,24 @@ public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
                 JcomboCRUD_CUS.addItem("Eliminar Estudiante");
                 JcomboCRUD_CUS.addItem("Actualizar Estudiante");
                 break;}
-            case "Administrar asignaturas":{
+            case "Administrar Aulas":{
                 JcomboCRUD_CUS.removeAllItems();
-               
-                JcomboCRUD_CUS.addItem("Crear Asignatura");
-                JcomboCRUD_CUS.addItem("Consultar Asignatura");
-                JcomboCRUD_CUS.addItem("Eliminar Asignatura");
-                JcomboCRUD_CUS.addItem("Actualizar Asignatura");
+               java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                AdministrarAulas dialog = new AdministrarAulas(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        //System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+                JcomboCRUD_CUS.addItem("Crear Aula");
+                JcomboCRUD_CUS.addItem("Consultar Aula");
+                JcomboCRUD_CUS.addItem("Eliminar Aula");
+                JcomboCRUD_CUS.addItem("Actualizar Aula");
                 break;}
             
             
@@ -122,9 +139,22 @@ public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
        String selesccion2=JcomboCRUD_CUS.getSelectedItem().toString();
        switch(selesccion2){
            case "Crear Docente":{
-               AbrirInterfazAdministracionDocente("Crear Docente");
+               Conexion myconexion= new Conexion();
+               try {
+                   
+                   PreparedStatement ConsultaPreparada=myconexion.getConnection().prepareStatement("select count(cedula)can from docente where estado = 1 ");
+                   ResultSet res=ConsultaPreparada.executeQuery();
+                   if(res.next()){
+                   System.out.println("La cantidad es: "+res.getString("can"));
+                   if(Integer.parseInt(res.getString("can"))< 5 ){
+                       AbrirInterfazAdministracionDocente("Crear Docente");
+                      
+                   }else{JOptionPane.showMessageDialog(null,"EL cupo de docentes ya esta completo");}  
+                   }
+               } catch (SQLException ex) {
+                   Logger.getLogger(inicioAdmibnistradorDocente.class.getName()).log(Level.SEVERE, null, ex);
+               }}
             break;
-           }
            case "Consultar Docente":{
                //AbrirInterfazAdministracionDocente("Consultar Docente");
                 java.awt.EventQueue.invokeLater(new Runnable() {
@@ -157,7 +187,19 @@ public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
                AbrirInterfazAdministrarEstudiante("Eliminar Estudiante");
             break;
            }case "Consultar Estudiante":{
-               AbrirInterfazAdministrarEstudiante("Consultar Estudiante");
+              // AbrirInterfazAdministrarEstudiante("Consultar Estudiante");
+              java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        MostrarEstudiante dialog = new MostrarEstudiante(new javax.swing.JFrame(), true);
+                        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                            @Override
+                            public void windowClosing(java.awt.event.WindowEvent e) {
+                                //System.exit(0);
+                            }
+                        });
+                        dialog.setVisible(true);
+                    }
+                });
             break;
            }
            
@@ -165,9 +207,10 @@ public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
            
            
        }             
+             
     }//GEN-LAST:event_btnSiguiente2ActionPerformed
         
-     //METODSO SE ENCARGA DE ABRIR LA INTERFAZ DE ADMINISTRACION DE DOCENTE
+     //METODO SE ENCARGA DE ABRIR LA INTERFAZ DE ADMINISTRACION DE DOCENTE
     public void AbrirInterfazAdministracionDocente(String AccionArealizar){
            java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {

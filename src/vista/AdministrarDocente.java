@@ -91,7 +91,7 @@ public class AdministrarDocente extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("AGREGAR DOCENTE");
+        jLabel1.setText("ADMINISTRAR  DOCENTE");
 
         jLabel2.setText("Cédula ");
 
@@ -491,7 +491,7 @@ public class AdministrarDocente extends javax.swing.JDialog {
 
     private void txtCedulaCrearKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaCrearKeyTyped
         MyLogin.Solonumeros(evt);
-        MyLogin.validarTamañoTXT(txtCedulaCrear, 12, evt);
+        MyLogin.validarTamañoTXT(txtCedulaCrear, 10, evt);
     }//GEN-LAST:event_txtCedulaCrearKeyTyped
 
     

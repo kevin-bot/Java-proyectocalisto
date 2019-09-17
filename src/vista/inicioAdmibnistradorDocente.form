@@ -70,11 +70,10 @@
     <Component class="javax.swing.JComboBox" name="jComboCUN">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
+          <StringArray count="3">
             <StringItem index="0" value="Administrar docente"/>
             <StringItem index="1" value="Administrar estudiante"/>
-            <StringItem index="2" value="Administrar asignaturas"/>
-            <StringItem index="3" value="Administrar salones"/>
+            <StringItem index="2" value="Administrar Aulas"/>
           </StringArray>
         </Property>
       </Properties>

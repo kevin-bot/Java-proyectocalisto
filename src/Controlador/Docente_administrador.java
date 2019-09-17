@@ -45,20 +45,20 @@ public class Docente_administrador extends Usuario{
     public void Creardocente(Docente MiDocente){
          Conexion miDbconn=new Conexion();              
         try {        
-            PreparedStatement ConsultaPreparada=miDbconn.getConnection().prepareStatement("select count(cedula)can from docente where estado = 1");            
-            ResultSet res=ConsultaPreparada.executeQuery();
-            
-            if(res.next() && res.getString("can").equals("4")){
+//            PreparedStatement ConsultaPreparada=miDbconn.getConnection().prepareStatement("select cedula from docente where (select count(cedula) from docente )<= 5 and estado = 1 ");            
+//            ResultSet res=ConsultaPreparada.executeQuery();
+//            
+//            if(res.next() ){
             
                 
                  Statement pst = miDbconn.getConnection().createStatement();                                     
                  pst.executeUpdate("INSERT INTO docente VALUES ('"+MiDocente.getCedula()+"','"+MiDocente.getNombre()+"','"+MiDocente.getApellido()+"','"+MiDocente.getEps()
-                         +"','"+MiDocente.getEstrato()+"','"+MiDocente.getGrado()+"','2019-04-04','1','"+MiDocente.getFormacion()+"','"+MiDocente.getPassword()+"','"+MiDocente.getTelefono()+"','"+MiDocente.getDireccion()+"')");
+                         +"','"+MiDocente.getEstrato()+"','"+MiDocente.getGrado()+"','2019-08-08','1','"+MiDocente.getFormacion()+"','"+MiDocente.getPassword()+"','"+MiDocente.getTelefono()+"','"+MiDocente.getDireccion()+"')");
  
                 JOptionPane.showMessageDialog(null, "El docente fue creado exitosamente"); pst.close();  
-            }else{
-                JOptionPane.showMessageDialog(null, "Usted ya tiene el cupo de docentes completo, debes de eliminar un docente","Advertencia",2);} 
-            
+//            }else{
+//                JOptionPane.showMessageDialog(null, "Usted ya tiene el cupo de docentes completo, debes de eliminar un docente","Advertencia",2);} 
+//            
             miDbconn.getdesconectar();
         } catch (SQLException ex) {
             //Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);            
@@ -205,23 +205,54 @@ public class Docente_administrador extends Usuario{
     }
     
     
-    //  CRUD ESTUDIANTE
     
-    public void ConsultarEstudiante(Estudiante myEstudiante){
-        Conexion miDbconn=new Conexion();              
-        /*try {              
-                 Statement pst = miDbconn.getConnection().createStatement();                                     
-                 pst.executeUpdate("INSERT INTO docente VALUES ('"+myEstudiante.getTI()+"','"+MiDocente.getNombre()+"','"+MiDocente.getApellido()+"','"+MiDocente.getEps()
-                         +"','"+MiDocente.getEstrato()+"','"+MiDocente.getGrado()+"','2019-04-04','1','"+MiDocente.getFormacion()+"','"+MiDocente.getPassword()+"','"+MiDocente.getTelefono()+"')");
-
-                JOptionPane.showMessageDialog(null, "La matricula re ha registrado exitosamente");
-
-            pst.close(); 
-            miDbconn.getdesconectar();
+    
+    //  CRUD ESTUDIANTE
+    public  void BuscarEstudianteLenarJcombo(JComboBox combo){        
+        try {
+            Conexion miDbconn=new Conexion();
+            PreparedStatement ConsultaPreparada=miDbconn.getConnection().prepareStatement("SELECT * FROM estudiante where estado = 1 ");            
+            ResultSet res=ConsultaPreparada.executeQuery();
+            while(res.next()){
+                combo.addItem(res.getString("TI"));
+            }
         } catch (SQLException ex) {
-            //Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);            
-            JOptionPane.showMessageDialog(null,"Error ya existe ", null, 0);
-        }*/
+            Logger.getLogger(Docente_administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    public ArrayList<Estudiante> ConsultarEstudiante(){
+        Conexion miconexion=new Conexion();
+         ArrayList<Estudiante> miListestudiante = new ArrayList<>();
+         
+        
+        try{
+            PreparedStatement ConsultaPreparada=miconexion.getConnection().prepareStatement("SELECT * FROM estudiante where estado = 1 ");
+                                    
+            ResultSet res=ConsultaPreparada.executeQuery();
+            
+            
+            while(res.next()){
+               Estudiante miEstudiante = new Estudiante();
+               miEstudiante.setIt(res.getString("TI"));                   
+              miEstudiante.setNombre(res.getString("nombre"));              
+              miEstudiante.setApellido(res.getString("apell1"));
+              miEstudiante.setEps(res.getString("eps"));
+              miEstudiante.setStrato(""+res.getInt("estrato"));             
+              miEstudiante.setGrado(""+res.getInt("grado"));
+              
+              miListestudiante.add(miEstudiante); 
+            }
+                    
+           
+            res.close();
+            ConsultaPreparada.close();
+            miconexion.getdesconectar();
+            
+        } catch (Exception e) {
+            
+        }
+        return miListestudiante;
         
     }
     public void CrearEstudiante(Estudiante myEstudiante){
@@ -240,28 +271,100 @@ public class Docente_administrador extends Usuario{
             JOptionPane.showMessageDialog(null,"Error ya existe ", null, 0);
         }
     }
-    public void EliminarEstudiante(){
-    
+    public void EliminarEstudiante(String TI){
+                Conexion miDbconn=new Conexion();              
+        try {  
+             PreparedStatement ConsultaPreparada=miDbconn.getConnection().prepareStatement("SELECT * FROM estudiante where TI=? and estado like 1");
+            ConsultaPreparada.setString(1, TI);
+                                    
+            ResultSet res=ConsultaPreparada.executeQuery();
+            if(res.next()){
+            
+             Statement pst = miDbconn.getConnection().createStatement();                                                  
+             pst.executeUpdate("update estudiante set estado=0  where TI like '"+TI+"'");              
+             JOptionPane.showMessageDialog(null, "Eliminado exitosamente");
+            
+            pst.close();
+            }else{JOptionPane.showMessageDialog(null, "El estudiante no existe");}
+            ConsultaPreparada.close();
+            miDbconn.getdesconectar();
+            
+        } catch (SQLException ex) {
+            //Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);            
+            JOptionPane.showMessageDialog(null,"Falló", null, 0);
+        }
+    }    
+    public ArrayList<Estudiante> BuscarTIEstudianteAModificar(String TI){
+        Conexion miconexion=new Conexion();
+         ArrayList<Estudiante> miListEstudiante = new ArrayList<>();
+         
+        
+        try{
+            
+            PreparedStatement ConsultaPreparada=miconexion.getConnection().prepareStatement("SELECT * FROM estudiante where TI = ? ");
+                ConsultaPreparada.setString(1, TI);
+                
+            ResultSet res=ConsultaPreparada.executeQuery();
+
+            if(res.next()){
+               Estudiante myEstudiante=  new Estudiante();
+               myEstudiante.setIt(res.getString("TI"));  
+                myEstudiante.setStrato(res.getString("estrato"));              
+              myEstudiante.setNombre(res.getString("nombre"));              
+              myEstudiante.setApellido(res.getString("apell1"));
+             myEstudiante.setEps(res.getString("eps")); 
+              myEstudiante.setEstado(res.getString("estado"));  
+              myEstudiante.setGrado(res.getString("grado"));
+                                       
+              miListEstudiante.add(myEstudiante); 
+            }
+                    
+           
+            res.close();
+            ConsultaPreparada.close();
+            miconexion.getdesconectar();
+            
+        } catch (Exception e) {
+            
+        }
+        return miListEstudiante;
     }
-    public void ActualizarEstudiante(){
-    
+    public void ActualizarEstudiante(Estudiante myEstudiante){
+            Conexion miDbconn=new Conexion();              
+        try { 
+            PreparedStatement ConsultaPreparada=miDbconn.getConnection().prepareStatement("SELECT * FROM estudiante where TI=?");
+            ConsultaPreparada.setString(1, myEstudiante.getIt());            
+            ResultSet res=ConsultaPreparada.executeQuery();
+            if(res.next()){
+                
+             Statement pst = miDbconn.getConnection().createStatement();  
+             
+             pst.executeUpdate("UPDATE estudiante set nombre='"+myEstudiante.getNombre()+"',apell1='"+myEstudiante.getApellido()
+                         +"',eps='"+myEstudiante.getEps()+"',estrato="+myEstudiante.getStrato()+" ,grado="+myEstudiante.getGrado()+",año=2019,estado='"+res.getString("estado")+"' where TI=111");              
+            JOptionPane.showMessageDialog(null, "El estudiante fue actualizado exitosamente");   
+            
+            pst.close();
+            
+            }else{
+                 JOptionPane.showMessageDialog(null, "No existe");
+            }
+            
+            miDbconn.getdesconectar();
+            
+        } catch (SQLException ex) {
+            //Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);            
+            JOptionPane.showMessageDialog(null,"Error, ya existe ", null, 0);
+        }
     }
+    
+    
     
     //   ADMINISTRATIVO
     
-    public void AsignarAulaDocente(){
-                
-    }
-    public void DelegarAsignaturaDocente(){
-        
-    }
-    
-    public void DelegarCursoDocente(){
-        
-    }
-    public void DelegarSalonCurso(){
-        
-    }
+    public void CrearAula(Nota myNota){}
+    public void EliminarAula(){}
+    public void ActualizarAula(){}
+    public void ConsultarAula(){}
     
     
 }
