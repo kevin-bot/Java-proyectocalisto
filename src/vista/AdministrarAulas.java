@@ -58,15 +58,13 @@ public class AdministrarAulas extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         txttamaño = new javax.swing.JTextField();
         Jgrado = new javax.swing.JComboBox();
-        jId = new javax.swing.JComboBox<>();
+        jId = new javax.swing.JComboBox<String>();
         btnbuscar = new javax.swing.JButton();
         txtid = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setText("Grado ");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 104, 50, -1));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -74,7 +72,6 @@ public class AdministrarAulas extends javax.swing.JDialog {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 179, 85, 40));
 
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +79,6 @@ public class AdministrarAulas extends javax.swing.JDialog {
                 btnActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 179, 96, 40));
 
         btnguardar.setText("Guardar ");
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
@@ -90,33 +86,26 @@ public class AdministrarAulas extends javax.swing.JDialog {
                 btnguardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 179, 103, 40));
 
         jLabel1.setText("ADMINISTRAR AULAS");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 173, 26));
 
         jLabel2.setText("ID");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 69, 67, -1));
 
         jLabel3.setText("Nombres");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 61, 23));
 
         txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtnombreKeyTyped(evt);
             }
         });
-        getContentPane().add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(385, 61, 140, -1));
 
         jLabel4.setText("tamaño");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 101, 57, -1));
 
         txttamaño.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txttamañoKeyTyped(evt);
             }
         });
-        getContentPane().add(txttamaño, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 98, 160, -1));
 
         Jgrado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto" }));
         Jgrado.addItemListener(new java.awt.event.ItemListener() {
@@ -124,19 +113,90 @@ public class AdministrarAulas extends javax.swing.JDialog {
                 JgradoItemStateChanged(evt);
             }
         });
-        getContentPane().add(Jgrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 101, 150, -1));
-
-        getContentPane().add(jId, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 60, 72, -1));
 
         btnbuscar.setText("buscar");
-        getContentPane().add(btnbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 64, -1));
 
         txtid.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtidKeyTyped(evt);
             }
         });
-        getContentPane().add(txtid, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 160, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(240, 240, 240)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jId, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(txttamaño, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Jgrado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel2))
+                    .addComponent(jId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnbuscar)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel4))
+                    .addComponent(txttamaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel11))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(Jgrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -165,21 +225,22 @@ public class AdministrarAulas extends javax.swing.JDialog {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
 
-        String grado="";
+        int grado=0;
         switch(Jgrado.getSelectedItem().toString()){
-            case "Primero": grado="1";
+            case "Primero": grado=1;
             break;
-            case "Segundo": grado="2";
+            case "Segundo": grado=2;
             break;
-            case "Tercero": grado="3";
+            case "Tercero": grado=2;
             break;
-            case "Cuarto": grado="4";
+            case "Cuarto": grado=3;
             break;
-            case "Quinto": grado="5";
+            case "Quinto": grado=4;
             break;
         }
 
         Salon mySalon= new Salon(Integer.parseInt(txtid.getText()), txtnombre.getText(),grado,Integer.parseInt(txttamaño.getText()));
+        myDocente_administrador.CrearAula(mySalon);
 
     }//GEN-LAST:event_btnguardarActionPerformed
 

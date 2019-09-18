@@ -4,27 +4,30 @@ package Controlador;
 public class Salon {
     
     int id;
-    String nombre,grado;
-    int tamaño;
+    String nombre;
+    int tamaño,grado;
 
-    public Salon(int id, String nombre, String grado, int tamaño) {
+    public Salon(int id, String nombre, int tamaño, int grado) {
         this.id = id;
         this.nombre = nombre;
-        this.grado = grado;
         this.tamaño = tamaño;
+        this.grado = grado;
     }
+
    
 
     public Salon() {
     }
 
-    public String getGrado() {
+    public int getGrado() {
         return grado;
     }
 
-    public void setGrado(String grado) {
+    public void setGrado(int grado) {
         this.grado = grado;
     }
+
+    
 
     public int getTamaño() {
         return tamaño;

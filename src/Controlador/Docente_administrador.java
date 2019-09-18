@@ -361,14 +361,19 @@ public class Docente_administrador extends Usuario{
     
     //   ADMINISTRATIVO
     
-    public void CrearAula(Nota myNota){
+    public void CrearAula(Salon mySalon){
+        
         Conexion miDbconn=new Conexion();          
         try {              
                  Statement pst = miDbconn.getConnection().createStatement(); 
                  
-                 pst.executeUpdate("INSERT INTO nota VALUES ()");
-
-                JOptionPane.showMessageDialog(null, "La matricula re ha registrado exitosamente");
+                 System.out.println(""+mySalon.getNombre());
+                 System.out.println(""+mySalon.getGrado());
+                 System.out.println(""+mySalon.getId());
+                 System.out.println(""+mySalon.getTamaño());
+                // pst.executeUpdate("INSERT INTO aula (id,nombre,grado,tamaño) VALUES ("+mySalon.getId()+",'"+mySalon.getNombre()+"',"+mySalon+","+mySalon.getTamaño()+")");
+                  pst.executeUpdate("INSERT INTO aula (id,nombre,grado,tamaño,ubicacion,espacio,docente) VALUES ("+mySalon.getId()+",'"+mySalon.getNombre()+"',"+mySalon.getGrado()+","+mySalon.getTamaño()+",'0',0,'0')");
+                JOptionPane.showMessageDialog(null, "Éxito");
 
             pst.close(); 
             miDbconn.getdesconectar();
@@ -378,8 +383,41 @@ public class Docente_administrador extends Usuario{
         }
     }
     public void EliminarAula(){}
-    public void ActualizarAula(){}
-    public void ConsultarAula(){}
+    public void ActualizarAula(){}    
+    public ArrayList<Salon> ConsultarAula(){
+            Conexion miconexion=new Conexion();
+         ArrayList<Salon> miSalon = new ArrayList<>();
+         
+        
+        try{
+            PreparedStatement ConsultaPreparada=miconexion.getConnection().prepareStatement("SELECT * FROM aula");
+                                    
+            ResultSet res=ConsultaPreparada.executeQuery();
+            
+            
+            while(res.next()){
+               Salon misalon = new Salon();
+               misalon.setId(Integer.parseInt(res.getString("id")));                   
+              misalon.setGrado(res.getInt("grado"));              
+              misalon.setNombre(res.getString("nombre"));
+              misalon.setTamaño(Integer.parseInt(res.getString("tamaño")));
+                            
+              miSalon.add(misalon); 
+            }
+                    
+           
+            res.close();
+            ConsultaPreparada.close();
+            miconexion.getdesconectar();
+            
+        } catch (Exception e) {
+            
+        }
+        return miSalon;
+    }
+    
+    
+    
     
     
 }
