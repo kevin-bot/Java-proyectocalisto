@@ -361,7 +361,22 @@ public class Docente_administrador extends Usuario{
     
     //   ADMINISTRATIVO
     
-    public void CrearAula(Nota myNota){}
+    public void CrearAula(Nota myNota){
+        Conexion miDbconn=new Conexion();          
+        try {              
+                 Statement pst = miDbconn.getConnection().createStatement(); 
+                 
+                 pst.executeUpdate("INSERT INTO nota VALUES ()");
+
+                JOptionPane.showMessageDialog(null, "La matricula re ha registrado exitosamente");
+
+            pst.close(); 
+            miDbconn.getdesconectar();
+        } catch (SQLException ex) {
+            //Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);            
+            JOptionPane.showMessageDialog(null,"Error ya existe ", null, 0);
+        }
+    }
     public void EliminarAula(){}
     public void ActualizarAula(){}
     public void ConsultarAula(){}

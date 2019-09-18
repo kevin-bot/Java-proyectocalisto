@@ -68,7 +68,7 @@ public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(118, 118, 118)
                         .addComponent(jLabel1)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,8 +104,7 @@ public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
                
                 break;}
             case "Administrar estudiante":{
-                JcomboCRUD_CUS.removeAllItems();
-             
+                JcomboCRUD_CUS.removeAllItems();             
                 JcomboCRUD_CUS.addItem("Crear Estudiante");
                 JcomboCRUD_CUS.addItem("Consultar Estudiante");
                 JcomboCRUD_CUS.addItem("Eliminar Estudiante");
@@ -113,18 +112,6 @@ public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
                 break;}
             case "Administrar Aulas":{
                 JcomboCRUD_CUS.removeAllItems();
-               java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                AdministrarAulas dialog = new AdministrarAulas(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        //System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
                 JcomboCRUD_CUS.addItem("Crear Aula");
                 JcomboCRUD_CUS.addItem("Consultar Aula");
                 JcomboCRUD_CUS.addItem("Eliminar Aula");
@@ -201,6 +188,18 @@ public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
                     }
                 });
             break;
+           }case "Crear Aula":{
+               AbrirInterfazAdministrarNotas("Crear Aula");
+               break;
+           }case "Eliminar Aula":{
+               AbrirInterfazAdministrarNotas("Eliminar Aula");
+               break;
+           }case "Actualizar Aula":{
+               AbrirInterfazAdministrarNotas("Actualizar Aula");
+               break;
+           }case "Consultar Aula":{
+               AbrirInterfazAdministrarNotas("Consultar Aula");
+               break;
            }
            
            
@@ -244,6 +243,21 @@ public class inicioAdmibnistradorDocente extends javax.swing.JDialog {
         });
     }
     
+    public void AbrirInterfazAdministrarNotas(String AccionArealizar){
+           java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                AdministrarAulas dialog = new AdministrarAulas(new javax.swing.JFrame(), true,AccionArealizar);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        //System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+        
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> JcomboCRUD_CUS;

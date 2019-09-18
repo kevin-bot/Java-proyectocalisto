@@ -30,9 +30,11 @@ public class NotasPrimero extends javax.swing.JDialog {
     Nota minota= new Nota();
     int grado=1;
     ArrayList<Estudiante>llenartabla2=minota.listaNombre();
+    
     public NotasPrimero(java.awt.Frame parent, boolean modal,String Opcion_de_crud) {
         super(parent, modal);
         initComponents();
+        
         minota.llenarprimero(jcbprimero,grado);
        
         switch(Opcion_de_crud){

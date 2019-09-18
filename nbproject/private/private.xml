@@ -11,9 +11,8 @@
         </group>
         <group name="Group 20190524-10:18:13">
             <file>file:/D:/Documento/NetBeansProjects/proyectocalisto/src/vista/inicioAdmibnistradorDocente.java</file>
-            <file>file:/D:/Documento/NetBeansProjects/proyectocalisto/src/Controlador/Usuario.java</file>
-            <file>file:/D:/Documento/NetBeansProjects/proyectocalisto/src/Controlador/Docente.java</file>
-            <file>file:/D:/Documento/NetBeansProjects/proyectocalisto/src/Controlador/Docente_administrador.java</file>
+            <file>file:/D:/Documento/NetBeansProjects/proyectocalisto/src/Controlador/Salon.java</file>
+            <file>file:/D:/Documento/NetBeansProjects/proyectocalisto/src/vista/AdministrarAulas.java</file>
             <file>file:/D:/Documento/NetBeansProjects/proyectocalisto/src/vista/AdministrarDocente.java</file>
         </group>
     </open-files>
